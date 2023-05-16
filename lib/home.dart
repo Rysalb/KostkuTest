@@ -3,7 +3,10 @@ import 'package:projectmppl/daftarakun.dart';
 import 'package:projectmppl/passbaru.dart';
 
 import 'Login.dart';
+import 'daftarkamar.dart';
+import 'datapenyewa.dart';
 import 'lupapass.dart';
+import 'profile.dart';
 
 class home extends StatefulWidget {
 
@@ -31,7 +34,7 @@ class _homeState extends State<home> {
         break;
       case 2:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => passbaru()),
+          MaterialPageRoute(builder: (context) => profile()),
         );
         break;
     }
@@ -86,7 +89,7 @@ class _homeState extends State<home> {
                         MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => daftarakun()));
+                                MaterialPageRoute(builder: (context) => datapenyewa()));
                           },
                           child: Container(
                             width: 150,
@@ -172,7 +175,7 @@ class _homeState extends State<home> {
                         MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => daftarakun()));
+                                  MaterialPageRoute(builder: (context) => daftarkamar()));
                             },
                             child: Container(
                               width: 150,
