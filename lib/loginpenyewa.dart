@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/loginpenyewa.dart';
 
+import 'Login.dart';
 import 'home.dart';
 import 'lupapass.dart';
 
-class Login extends StatelessWidget {
+class loginpenyewa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class Login extends StatelessWidget {
                               Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "Login Sebagai Penyewa",
+                                    "Login Sebagai Admin",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: Colors.white,
@@ -65,7 +65,7 @@ class Login extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => loginpenyewa()));
+                                MaterialPageRoute(builder: (context) => Login()));
                           },
                           style: const ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projectmppl/Laporankeuangan.dart';
 import 'package:projectmppl/daftarakun.dart';
 import 'package:projectmppl/passbaru.dart';
+import 'package:projectmppl/tambahfasilitas.dart';
 
 import 'Login.dart';
+import 'chat.dart';
 import 'daftarkamar.dart';
 import 'datapenyewa.dart';
 import 'lupapass.dart';
@@ -24,7 +27,7 @@ class _homeState extends State<home> {
     switch (index) {
       case 0:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Login()),
+          MaterialPageRoute(builder: (context) => chat()),
         );
         break;
       case 1:
@@ -115,8 +118,6 @@ class _homeState extends State<home> {
                         SizedBox(height: 50),
                         MaterialButton(
                             onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => daftarakun()));
                             },
                             child: Container(
                               width: 150,
@@ -148,7 +149,7 @@ class _homeState extends State<home> {
                         MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => daftarakun()));
+                                  MaterialPageRoute(builder: (context) => laporankeuangan()));
                             },
                             child: Container(
                               width: 150,
@@ -207,7 +208,7 @@ class _homeState extends State<home> {
                   child: MaterialButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => daftarakun()));
+                            MaterialPageRoute(builder: (context) => tambahfasilitas()));
                       },
                       child: Container(
                         width: 150,

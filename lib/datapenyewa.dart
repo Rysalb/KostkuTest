@@ -111,7 +111,6 @@ class _datapenyewaState extends State<datapenyewa> {
                             ),
                             ),
                           )
-
                         ],
                       ),
                       Row(
