@@ -1,10 +1,48 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'passbaru.dart';
 
-class lupapass extends StatelessWidget {
+class lupapass extends StatefulWidget {
+  @override
+  State<lupapass> createState() => _lupapassState();
+}
+
+class _lupapassState extends State<lupapass> {
+final _emailController = TextEditingController();
 
   @override
+  void dispose(){
+    _emailController.dispose();
+  super.dispose();
+  }
+
+Future passwordReset() async{
+    try{
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text('cek email anda untuk mereset password'),
+          );
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
+    }
+  }
+
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -50,25 +88,12 @@ class lupapass extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
-                      hintText: 'Username',
+                      hintText: 'Email',
                     ),
+                    controller: _emailController,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      hintText: 'Nomer Keamanan',
-                    ),
-                  ),
-                ),
+
                 SizedBox(height: 10),
                 Row(
                   children: [
@@ -94,10 +119,7 @@ class lupapass extends StatelessWidget {
                               size: 60.0,
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => passbaru()));
-                          },
+                          onPressed: passwordReset,
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             shape: RoundedRectangleBorder(

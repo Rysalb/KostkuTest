@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectmppl/daftarakun.dart';
 import 'package:projectmppl/loginpenyewa.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'home.dart';
 import 'lupapass.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  late String _email, _pass;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +108,12 @@ class Login extends StatelessWidget {
                       ),
                       hintText: 'Username',
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        _email = value.trim();
+                      }
+                      );
+                    },
                   ),
                 ),
                 Padding(
@@ -112,6 +129,9 @@ class Login extends StatelessWidget {
                       ),
                       hintText: 'Password',
                     ),
+                    onChanged: (value) {
+                      _pass = value.trim();
+                    },
                   ),
                 ),
                 SizedBox(height: 50),
@@ -167,17 +187,22 @@ class Login extends StatelessWidget {
                             size: 60.0,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => home()));
-                        },
-
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), // <-- Radius
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20), // <-- Radius
+                            ),
                           ),
-                        ),
+                        onPressed: () {
+                          auth
+                              .signInWithEmailAndPassword(
+                              email: _email, password: _pass)
+                              .then((_) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => home()));
+                          });
+                        }
                       ),
                     )
                   ],

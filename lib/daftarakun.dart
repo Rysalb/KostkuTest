@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'Login.dart';
 
-class daftarakun extends StatelessWidget {
+class daftarakun extends StatefulWidget {
+  const daftarakun({Key? key}) : super(key: key);
+  @override
+  State<daftarakun> createState() => _daftarakunState();
+}
+
+class _daftarakunState extends State<daftarakun> {
+  late String _email, _pass;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +60,11 @@ class daftarakun extends StatelessWidget {
                       ),
                       hintText: 'Username',
                     ),
+                    onChanged: (value){
+                      setState(() {
+                        _email = value.trim();
+                      });
+                    },
                   ),
                 ),
                 Padding(
@@ -67,36 +80,9 @@ class daftarakun extends StatelessWidget {
                       ),
                       hintText: 'Password',
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      hintText: 'Nomer Telepon',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, right: 15.0, top: 15, bottom: 0),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      hintText: 'Nomer Keamanan',
-                    ),
+                    onChanged: (value){
+                      _pass = value.trim();
+                    },
                   ),
                 ),
                 SizedBox(height: 10),
@@ -124,16 +110,23 @@ class daftarakun extends StatelessWidget {
                               size: 60.0,
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => Login()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // <-- Radius
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20), // <-- Radius
+                              ),
                             ),
-                          ),
+                          onPressed: (){
+                            auth.createUserWithEmailAndPassword(email: _email, password: _pass).then((_){
+                            });
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text("Berhasil Membuat Akun !"),
+                            ));
+                          }
                         ),
                       ),
                     )
