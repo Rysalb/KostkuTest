@@ -56,91 +56,38 @@ class _daftarkamarState extends State<daftarkamar> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 10),
-                Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 1000,
-                  decoration: new BoxDecoration(
-                      color: Colors.yellow[100]
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Image.asset('assets/smallapart.png')
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(context: context, builder: (context) => AlertDialog(
+                      icon: Image.asset('assets/smallapart.png'),
+                      title: Text('Kamar Nomor 1'),
+                      content: Text('Ini isinya kamar'),
+                    )
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black,
+                      elevation: 0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5,left: 15.0),
-                        child: Text(
-                          'Kamar 1',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 1000,
-                  decoration: new BoxDecoration(
-                      color: Colors.yellow[100]
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Image.asset('assets/smallapart.png')
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5,left: 15.0),
-                        child: Text(
-                          'Kamar 2',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 1000,
-                  decoration: new BoxDecoration(
-                  ),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.yellow[100]
-                      ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => tambahkamar()));
-                    },
+                  child: Container(
+                    margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                    width: 1000,
+                    decoration: new BoxDecoration(
+                        color: Colors.yellow[100]
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Icon(Icons.add_circle,
-                              color: Colors.black,
-                              size: 50.0,)
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Image.asset('assets/smallapart.png')
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 5,left: 15.0),
                           child: Text(
-                            'Tambah Kamar',
+                            'Kamar 1',
                             style: TextStyle(
                               color: Colors.black45,
                               fontSize: 30,
@@ -152,6 +99,8 @@ class _daftarkamarState extends State<daftarkamar> {
                     ),
                   ),
                 ),
+
+                SizedBox(height: 10),
               ],
             ),
           ),

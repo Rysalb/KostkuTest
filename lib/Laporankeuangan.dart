@@ -46,6 +46,21 @@ class _laporankeuanganState extends State<laporankeuangan> {
               )
             ],
           ),
+          actions: [
+            Container(
+              margin: EdgeInsets.only(right: 20),
+              child: IconButton(
+                icon: Icon(
+                  Icons.keyboard_arrow_left,
+                  size: 50.0,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => home()));
+                },
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -132,47 +147,6 @@ class _laporankeuanganState extends State<laporankeuangan> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Container(
-                  child:
-                  Container(
-                    margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                    width: 1000,
-                    decoration: new BoxDecoration(
-                    ),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.yellow[100]
-                      ),
-                      onPressed: () {Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => tambahlaporan()));
-
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: Icon(Icons.add_circle,
-                                color: Colors.black,
-                                size: 50.0,)
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5,left: 15.0),
-                            child: Text(
-                              'Tambah Laporan',
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

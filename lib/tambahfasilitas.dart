@@ -68,36 +68,12 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 5,left: 15.0),
-                            child: Text(
-                              'Lantai 1',
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Padding(
-                                padding: const EdgeInsets.only(top: 5,left: 200.0),
-                                child: Icon(Icons.delete, color: Colors.black,
-                                  size: 40.0,)
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Fasilitas',
+                              'Kompor',
                               style: TextStyle(
                                 color: Colors.black45,
-                                fontSize: 15,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -111,7 +87,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Dapur, TV, Tempat Duduk, Kamar Mandi',
+                              'Rp : ',
                               style: TextStyle(
                                 color: Colors.black45,
                                 fontSize: 15,
@@ -119,13 +95,23 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                               ),
                             ),
                           ),
-
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0.0),
+                            child: Text(
+                              '200.000',
+                              style: TextStyle(
+                                color: Colors.black45,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
                 ),
-
+                SizedBox(height: 20,),
                 Container(
                   margin: new EdgeInsets.symmetric(horizontal: 10.0),
                   width: 1000,
@@ -138,36 +124,12 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 5,left: 15.0),
-                            child: Text(
-                              'Lantai 2',
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5,left: 200.0),
-                              child: Icon(Icons.delete, color: Colors.black,
-                                size: 40.0,)
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Fasilitas',
+                              'Kompor',
                               style: TextStyle(
                                 color: Colors.black45,
-                                fontSize: 15,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -181,7 +143,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Dapur, TV, Tempat Duduk, Kamar Mandi',
+                              'Rp : ',
                               style: TextStyle(
                                 color: Colors.black45,
                                 fontSize: 15,
@@ -189,54 +151,23 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                               ),
                             ),
                           ),
-
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0.0),
+                            child: Text(
+                              '200.000',
+                              style: TextStyle(
+                                color: Colors.black45,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
                 ),
                 SizedBox(height: 20,),
-                Container(
-                  margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 1000,
-                  decoration: new BoxDecoration(
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        foregroundColor: Colors.black,
-                        elevation: 0,
-                        side: const BorderSide(
-                          width: 1.0,
-                          color: Colors.black45,
-                        )),
-                    onPressed: () {
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Icon(Icons.add_circle,
-                              color: Colors.black,
-                              size: 50.0,)
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5,left: 15.0),
-                          child: Text(
-                            'Tambah Kamar',
-                            style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
