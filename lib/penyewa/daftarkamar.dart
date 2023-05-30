@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/passbaru.dart';
-
-import 'Login.dart';
-import 'home.dart';
-import 'lupapass.dart';
-import 'tambahkamar.dart';
-import 'ubahprofile.dart';
+import 'package:projectmppl/home.dart';
 
 class daftarkamar extends StatefulWidget {
 

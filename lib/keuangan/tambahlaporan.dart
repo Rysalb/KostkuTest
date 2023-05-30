@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/passbaru.dart';
-import 'package:projectmppl/tambahlaporan.dart';
+import 'package:projectmppl/keuangan/pemasukan.dart';
+import 'package:projectmppl/keuangan/pengeluaran.dart';
 
-import 'Login.dart';
-import 'home.dart';
-import 'lupapass.dart';
-import 'ubahprofile.dart';
 
-class laporankeuangan extends StatefulWidget {
+class tambahlaporan extends StatefulWidget {
 
   @override
-  State<laporankeuangan> createState() => _laporankeuanganState();
+  State<tambahlaporan> createState() => _tambahlaporanState();
 }
 
-class _laporankeuanganState extends State<laporankeuangan> {
+class _tambahlaporanState extends State<tambahlaporan> {
 
   @override
   Widget build(BuildContext context) {
@@ -46,21 +41,6 @@ class _laporankeuanganState extends State<laporankeuangan> {
               )
             ],
           ),
-          actions: [
-            Container(
-              margin: EdgeInsets.only(right: 20),
-              child: IconButton(
-                icon: Icon(
-                  Icons.keyboard_arrow_left,
-                  size: 50.0,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => home()));
-                },
-              ),
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -81,15 +61,19 @@ class _laporankeuanganState extends State<laporankeuangan> {
                   decoration: new BoxDecoration(
                       color: Colors.yellow[100]
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow[100]
+                    ),
+                    onPressed: () {Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => pemasukan()));
+
+                    },
+                    child: Row(
                         children: [
                           Padding(padding: const EdgeInsets.only(left: 25.0),
                             child: Text(
-                              '25',
+                              'Pemasukan',
                               style: TextStyle(
                                 color: Colors.black45,
                                 fontSize: 25,
@@ -97,56 +81,53 @@ class _laporankeuanganState extends State<laporankeuangan> {
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 60.0),
-                            child: Text(
-                              'Pembayaran Listrik', style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 150.0),
+                            child: Image.asset('assets/arrow.png'),
                           )
                         ],
                       ),
-                      Row(
+                  ),
+                  ),
+                SizedBox(height: 10,),
+                Container(
+                  padding: const EdgeInsets.only(top: 10, bottom: 10.0),
+                  margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                  width: 1000,
+                  decoration: new BoxDecoration(
+                      color: Colors.yellow[100]
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow[100]
+                    ),
+                    onPressed: () {Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => pengeluaran()));
+                    },
+                    child: Row(
                         children: [
-                          Padding(padding: const EdgeInsets.only(left: 10.0),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 25.0),
                             child: Text(
-                              'Maret 2022',
+                              'Pengeluaran',
                               style: TextStyle(
                                 color: Colors.black45,
-                                fontSize: 15,
+                                fontSize: 25,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 25.0),
-                            child: Text(
-                              'Rp.400.000', style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 140.0),
+                            child: Transform.rotate(
+                              angle: 3.14159, // 180 degrees in radians
+                              child: Image.asset('assets/arrow.png'),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 80.0),
-                            child: Text(
-                              'Pengeluaran', style: TextStyle(
-                              color: Colors.black45,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            ),
-                          )
                         ],
                       ),
-                    ],
                   ),
                 ),
-                SizedBox(height: 10),
               ],
             ),
           ),

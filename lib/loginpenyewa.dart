@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/daftarakun.dart';
-
-import 'Login.dart';
 import 'home.dart';
-import 'lupapass.dart';
+import 'login/Login.dart';
+import 'login/daftarakun.dart';
+import 'login/lupapass.dart';
 
 class loginpenyewa extends StatelessWidget {
 
@@ -36,41 +35,41 @@ class loginpenyewa extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left : 45, right: 30),
+                  padding: const EdgeInsets.only(left: 45, right: 30),
                   child: Container(
-                      height: 20,
-                      width: 290,
-                      child: ElevatedButton(
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(
-                                  Icons.swap_horizontal_circle,
-                                  color: Colors.black45,
-                                  size: 20.0,
-                                ),
-                              ),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Login Sebagai Admin",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  )
-                              )
-                            ],
+                    height: 20,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => Login()));
+                      },
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Icon(
+                              Icons.swap_horizontal_circle,
+                              color: Colors.black45,
+                              size: 20.0,
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => Login()));
-                          },
-                          style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey),
-                          )
-                      )
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Login Sebagai Admin",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -116,6 +115,7 @@ class loginpenyewa extends StatelessWidget {
                 ),
                 SizedBox(height: 50),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -151,14 +151,17 @@ class loginpenyewa extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 80,),
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(80))
+                        borderRadius: BorderRadius.circular(80),
                       ),
                       height: 90,
                       width: 90,
                       child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => home()));
+                        },
                         child: RotatedBox(
                           quarterTurns: 3,
                           child: Icon(
@@ -167,19 +170,14 @@ class loginpenyewa extends StatelessWidget {
                             size: 60.0,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => home()));
-                        },
-
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), // <-- Radius
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],

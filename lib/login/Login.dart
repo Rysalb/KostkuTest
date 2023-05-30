@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projectmppl/daftarakun.dart';
+import 'package:projectmppl/home.dart';
 import 'package:projectmppl/loginpenyewa.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-import 'home.dart';
+import 'daftarakun.dart';
 import 'lupapass.dart';
 
 class Login extends StatefulWidget {
@@ -47,41 +45,41 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left : 45, right: 30),
+                  padding: const EdgeInsets.only(left: 45, right: 30),
                   child: Container(
-                      height: 20,
-                      width: 290,
-                      child: ElevatedButton(
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(
-                                  Icons.swap_horizontal_circle,
-                                  color: Colors.black45,
-                                  size: 20.0,
-                                ),
-                              ),
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Login Sebagai Penyewa",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  )
-                              )
-                            ],
+                    height: 20,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => loginpenyewa()));
+                      },
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Icon(
+                              Icons.swap_horizontal_circle,
+                              color: Colors.black45,
+                              size: 20.0,
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => loginpenyewa()));
-                          },
-                          style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey),
-                          )
-                      )
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Login Sebagai Penyewa",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -111,8 +109,7 @@ class _LoginState extends State<Login> {
                     onChanged: (value) {
                       setState(() {
                         _email = value.trim();
-                      }
-                      );
+                      });
                     },
                   ),
                 ),
@@ -136,6 +133,7 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: 50),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -171,14 +169,22 @@ class _LoginState extends State<Login> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 80,),
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(80))
+                        borderRadius: BorderRadius.circular(80),
                       ),
                       height: 90,
                       width: 90,
                       child: ElevatedButton(
+                        onPressed: () {
+                          auth
+                              .signInWithEmailAndPassword(
+                              email: _email, password: _pass)
+                              .then((_) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => home()));
+                          });
+                        },
                         child: RotatedBox(
                           quarterTurns: 3,
                           child: Icon(
@@ -187,24 +193,14 @@ class _LoginState extends State<Login> {
                             size: 60.0,
                           ),
                         ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // <-- Radius
-                            ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        onPressed: () {
-                          auth
-                              .signInWithEmailAndPassword(
-                              email: _email, password: _pass)
-                              .then((_) {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => home()));
-                          });
-                        }
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],

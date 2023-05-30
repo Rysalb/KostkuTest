@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'Login.dart';
+import 'login/Login.dart';
 
 class passbaru extends StatelessWidget {
 

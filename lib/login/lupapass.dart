@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
+import '../firebase/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'passbaru.dart';
+import '../passbaru.dart';
 
 class lupapass extends StatefulWidget {
   @override

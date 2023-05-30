@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/passbaru.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'Login.dart';
 import 'home.dart';
-import 'lupapass.dart';
-import 'ubahprofile.dart';
 
 class chat extends StatefulWidget {
 
@@ -165,8 +159,8 @@ class _chatState extends State<chat> {
 
   }
   void _wasyarif() async{
-    String nomorhp = '08213123131';
-    var url = 'https://wa.me/083111778069';
+    String nomorhp = '083111778069';
+    var url = 'https://wa.me/+6283111778069';
     await launch(url);
   }
 }

@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/Laporankeuangan.dart';
-import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/passbaru.dart';
+import '../home.dart';
 
-import 'Login.dart';
-import 'home.dart';
-import 'lupapass.dart';
-import 'profile.dart';
-import 'ubahprofile.dart';
-
-class pengeluaran extends StatefulWidget {
+class pemasukan extends StatefulWidget {
 
   @override
-  State<pengeluaran> createState() => _pengeluaranState();
+  State<pemasukan> createState() => _pemasukanState();
 }
 
-class _pengeluaranState extends State<pengeluaran> {
+class _pemasukanState extends State<pemasukan> {
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +31,7 @@ class _pengeluaranState extends State<pengeluaran> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left : 2.0),
-                child: Text('Pengeluaran',style: TextStyle(
+                child: Text('Pemasukan',style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),

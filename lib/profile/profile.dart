@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/passbaru.dart';
-
-import 'Login.dart';
-import 'home.dart';
-import 'lupapass.dart';
-import 'ubahprofile.dart';
+import 'package:projectmppl/profile/ubahprofile.dart';
+import '../home.dart';
 
 class profile extends StatefulWidget {
 

@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:projectmppl/Laporankeuangan.dart';
-import 'package:projectmppl/daftarakun.dart';
-import 'package:projectmppl/passbaru.dart';
-import 'package:projectmppl/tambahfasilitas.dart';
-
-import 'Login.dart';
+import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
+import 'package:projectmppl/profile/profile.dart';
 import 'chat.dart';
-import 'daftarkamar.dart';
-import 'datapenyewa.dart';
-import 'lupapass.dart';
-import 'profile.dart';
+import 'keuangan/Laporankeuangan.dart';
+import 'penyewa/daftarkamar.dart';
+import 'penyewa/datapenyewa.dart';
 
 class home extends StatefulWidget {
-
   @override
   State<home> createState() => _homeState();
 }
@@ -78,191 +72,237 @@ class _homeState extends State<home> {
                   ),
                 ),
                 Container(
-                  width: 1000,
+                  width: double.infinity,
                   height: 10,
                   color: Colors.yellow[100],
                 ),
                 SizedBox(height: 80),
                 Row(
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MaterialButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => datapenyewa()));
-                          },
-                          child: Container(
-                            width: 150,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(Icons.person, color: Colors.purple[200],
-                                  size: 90.0,),
-                                Text('List Data Penyewa', textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                ),)
-                              ],
-                            ),
-                          )
-                        ),
-                        SizedBox(height: 50),
-                        MaterialButton(
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MaterialButton(
                             onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => datapenyewa()),
+                              );
                             },
                             child: Container(
-                              width: 150,
+                              width: double.infinity,
                               height: 150,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Column(
                                 children: [
-                                  Icon(Icons.menu_book, color: Colors.purple[200],
-                                    size: 90.0,),
-                                  Text('Pembukuan', textAlign: TextAlign.center,
+                                  Icon(
+                                    Icons.person,
+                                    color: Colors.purple[200],
+                                    size: 90.0,
+                                  ),
+                                  Text(
+                                    'List Data Penyewa',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                       fontSize: 25,
-                                    ),)
+                                    ),
+                                  ),
                                 ],
                               ),
-                            )
-                        ),
-                      ],
+                            ),
+                          ),
+                          SizedBox(height: 50),
+                          MaterialButton(
+                            onPressed: () {},
+                            child: Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.menu_book,
+                                    color: Colors.purple[200],
+                                    size: 90.0,
+                                  ),
+                                  Text(
+                                    'Pembukuan',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 50),
+                          Container(
+                            child: MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(builder: (context) => tambahfasilitas()),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.wifi,
+                                      color: Colors.purple[200],
+                                      size: 90.0,
+                                    ),
+                                    Text(
+                                      'Fasilitas',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MaterialButton(
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => laporankeuangan()));
+                                MaterialPageRoute(builder: (context) => LaporanKeuangan()),
+                              );
                             },
                             child: Container(
-                              width: 150,
+                              width: double.infinity,
                               height: 150,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Column(
                                 children: [
-                                  Icon(Icons.attach_money, color: Colors.purple[200],
-                                    size: 90.0,),
-                                  Text('Laporan Keuangan', textAlign: TextAlign.center,
+                                  Icon(
+                                    Icons.attach_money,
+                                    color: Colors.purple[200],
+                                    size: 90.0,
+                                  ),
+                                  Text(
+                                    'Laporan Keuangan',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                       fontSize: 25,
-                                    ),)
+                                    ),
+                                  ),
                                 ],
                               ),
-                            )
-                        ),
-                        SizedBox(height: 50),
-                        MaterialButton(
+                            ),
+                          ),
+                          SizedBox(height: 50),
+                          MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => daftarkamar()));
+                                MaterialPageRoute(builder: (context) => daftarkamar()),
+                              );
                             },
                             child: Container(
-                              width: 150,
+                              width: double.infinity,
                               height: 150,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20)
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                               child: Column(
                                 children: [
-                                  Icon(Icons.key_outlined, color: Colors.purple[200],
-                                    size: 90.0,),
-                                  Text('Tambah Kamar', textAlign: TextAlign.center,
+                                  Icon(
+                                    Icons.key_outlined,
+                                    color: Colors.purple[200],
+                                    size: 90.0,
+                                  ),
+                                  Text(
+                                    'Tambah Kamar',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                       fontSize: 25,
-                                    ),)
+                                    ),
+                                  ),
                                 ],
                               ),
-                            )
-                        ),
-                      ],
+                            ),
+                          ),
+                          SizedBox(height: 50),
+                          Container(
+                            child: Container(
+                                width: double.infinity,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ],
-                ),
-                SizedBox(height: 50),
-                Container(
-                  child: MaterialButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => tambahfasilitas()));
-                      },
-                      child: Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)
-                        ),
-                        child: Column(
-                          children: [
-                            Icon(Icons.wifi, color: Colors.purple[200],
-                              size: 90.0,),
-                            Text('Fasilitas', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 25,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                  ),
                 ),
               ],
             ),
           ),
         ),
-
         bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
-                label: 'Contact',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Account',
-              ),
-            ],
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.yellow[100],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.black,
-            iconSize:20,
-            onTap: _onItemTapped,
-            elevation: 5
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Contact',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Account',
+            ),
+          ],
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.yellow[100],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.black,
+          iconSize: 20,
+          onTap: _onItemTapped,
+          elevation: 5,
         ),
       ),
     );
   }
 }
-
