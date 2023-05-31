@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
 import 'package:projectmppl/profile/profile.dart';
-import 'chat.dart';
-import 'keuangan/Laporankeuangan.dart';
-import 'kamar/daftarkamar.dart';
-import 'kamar/datapenyewa.dart';
+import '../chat.dart';
+import '../home.dart';
 
-class home extends StatefulWidget {
+class homepenyewa extends StatefulWidget {
   @override
-  State<home> createState() => _homeState();
+  State<homepenyewa> createState() => _homepenyewaState();
 }
 
-class _homeState extends State<home> {
+class _homepenyewaState extends State<homepenyewa> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -26,7 +24,7 @@ class _homeState extends State<home> {
         break;
       case 1:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => home()),
+          MaterialPageRoute(builder: (context) => homepenyewa()),
         );
         break;
       case 2:
@@ -86,9 +84,6 @@ class _homeState extends State<home> {
                         children: [
                           MaterialButton(
                             onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => datapenyewa()),
-                              );
                             },
                             child: Container(
                               width: double.infinity,
@@ -100,12 +95,12 @@ class _homeState extends State<home> {
                               child: Column(
                                 children: [
                                   Icon(
-                                    Icons.person,
-                                    color: Colors.purple[200],
+                                    Icons.zoom_in,
+                                    color: Colors.orange[700],
                                     size: 90.0,
                                   ),
                                   Text(
-                                    'List Data Penyewa',
+                                    'Lihat Kamar',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -130,12 +125,12 @@ class _homeState extends State<home> {
                               child: Column(
                                 children: [
                                   Icon(
-                                    Icons.menu_book,
-                                    color: Colors.purple[200],
+                                    Icons.calendar_month,
+                                    color: Colors.orange[700],
                                     size: 90.0,
                                   ),
                                   Text(
-                                    'Pembukuan',
+                                    'Calender',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -150,11 +145,57 @@ class _homeState extends State<home> {
                           ),
                           SizedBox(height: 50),
                           Container(
+                            child: Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MaterialButton(
+                            onPressed: () {
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.shopping_cart,
+                                    color: Colors.orange[700],
+                                    size: 90.0,
+                                  ),
+                                  Text(
+                                    'Pembayaran',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 50),
+                          Container(
                             child: MaterialButton(
                               onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => tambahfasilitas()),
-                                );
                               },
                               child: Container(
                                 width: double.infinity,
@@ -167,7 +208,7 @@ class _homeState extends State<home> {
                                   children: [
                                     Icon(
                                       Icons.wifi,
-                                      color: Colors.purple[200],
+                                      color: Colors.orange[700],
                                       size: 90.0,
                                     ),
                                     Text(
@@ -184,92 +225,17 @@ class _homeState extends State<home> {
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => LaporanKeuangan()),
-                              );
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.attach_money,
-                                    color: Colors.purple[200],
-                                    size: 90.0,
-                                  ),
-                                  Text(
-                                    'Laporan Keuangan',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 50),
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => daftarkamar()),
-                              );
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.key_outlined,
-                                    color: Colors.purple[200],
-                                    size: 90.0,
-                                  ),
-                                  Text(
-                                    'Tambah Kamar',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
                           SizedBox(height: 50),
                           Container(
                             child: Container(
-                                width: double.infinity,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
+                          ),
                         ],
                       ),
                     ),

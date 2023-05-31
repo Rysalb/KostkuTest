@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'login/Login.dart';
-import 'login/daftarakun.dart';
-import 'login/lupapass.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:projectmppl/home.dart';
+import '../login/Login.dart';
+import '../login/daftarakun.dart';
+import '../login/lupapass.dart';
+import 'homepenyewa.dart';
 
-class loginpenyewa extends StatelessWidget {
+class loginpenyewa extends StatefulWidget {
+  const loginpenyewa({Key? key}) : super(key: key);
+
+  @override
+  State<loginpenyewa> createState() => _loginpenyewaState();
+}
+
+class _loginpenyewaState extends State<loginpenyewa> {
+  late String _email, _pass;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +107,11 @@ class loginpenyewa extends StatelessWidget {
                       ),
                       hintText: 'Username',
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        _email = value.trim();
+                      });
+                    },
                   ),
                 ),
                 Padding(
@@ -111,6 +127,9 @@ class loginpenyewa extends StatelessWidget {
                       ),
                       hintText: 'Password',
                     ),
+                    onChanged: (value) {
+                      _pass = value.trim();
+                    },
                   ),
                 ),
                 SizedBox(height: 50),
@@ -159,8 +178,13 @@ class loginpenyewa extends StatelessWidget {
                       width: 90,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => home()));
+                          auth
+                              .signInWithEmailAndPassword(
+                              email: _email, password: _pass)
+                              .then((_) {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => homepenyewa()));
+                          });
                         },
                         child: RotatedBox(
                           quarterTurns: 3,

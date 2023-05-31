@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectmppl/home.dart';
-import 'package:projectmppl/loginpenyewa.dart';
+import 'package:projectmppl/penyewa/loginpenyewa.dart';
 import 'daftarakun.dart';
 import 'lupapass.dart';
 

@@ -23,9 +23,9 @@ class _datapenyewaState extends State<datapenyewa> {
           elevation: 0,
           leading: IconButton(
             icon: Icon(
-                Icons.keyboard_arrow_left,
-                size: 70.0,
-              ),
+              Icons.keyboard_arrow_left,
+              size: 70.0,
+            ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => home()));
@@ -1264,4 +1264,3 @@ class _datapenyewaState extends State<datapenyewa> {
     );
   }
 }
-
