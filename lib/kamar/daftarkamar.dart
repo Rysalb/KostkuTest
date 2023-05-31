@@ -48,7 +48,7 @@ class _daftarkamarState extends State<daftarkamar> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           toolbarHeight: 80,
-          backgroundColor: Colors.deepOrange,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
             icon: RotatedBox(

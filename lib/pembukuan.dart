@@ -3,12 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projectmppl/home.dart';
 import 'package:intl/intl.dart';
 
-class LaporanKeuangan extends StatefulWidget {
+class pembukuan extends StatefulWidget {
   @override
-  _LaporanKeuanganState createState() => _LaporanKeuanganState();
+  _pembukuanState createState() => _pembukuanState();
 }
 
-class _LaporanKeuanganState extends State<LaporanKeuangan> {
+class _pembukuanState extends State<pembukuan> {
   final TextEditingController _biayaController = TextEditingController();
   final TextEditingController _keteranganController = TextEditingController();
   bool _status = false;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
+import 'package:projectmppl/keuangan/chart.dart';
 import 'package:projectmppl/profile/profile.dart';
 import 'chat.dart';
-import 'keuangan/Laporankeuangan.dart';
+import 'pembukuan.dart';
 import 'kamar/daftarkamar.dart';
 import 'kamar/datapenyewa.dart';
 
@@ -87,7 +88,7 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => datapenyewa()),
+                                MaterialPageRoute(builder: (context) => DataPenyewa()),
                               );
                             },
                             child: Container(
@@ -119,7 +120,11 @@ class _homeState extends State<home> {
                           ),
                           SizedBox(height: 50),
                           MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) => pembukuan()),
+                              );
+                            },
                             child: Container(
                               width: double.infinity,
                               height: 150,
@@ -195,7 +200,7 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => LaporanKeuangan()),
+                                MaterialPageRoute(builder: (context) => ChartScreen()),
                               );
                             },
                             child: Container(
