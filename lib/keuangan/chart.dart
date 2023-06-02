@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../home.dart';
+
 class ChartScreen extends StatefulWidget {
   const ChartScreen({Key? key}) : super(key: key);
 
@@ -15,6 +17,17 @@ class _ChartScreenState extends State<ChartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orangeAccent[700],
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => home()));
+          },
+        ),
         title: const Text('Grafik Pemasukan dan Pengeluaran'),
       ),
       body: StreamBuilder<QuerySnapshot>(

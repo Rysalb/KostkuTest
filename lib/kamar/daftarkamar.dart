@@ -47,9 +47,9 @@ class _daftarkamarState extends State<daftarkamar> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          toolbarHeight: 80,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.orangeAccent[700],
           elevation: 0,
+          toolbarHeight: 80,
           leading: IconButton(
             icon: RotatedBox(
               quarterTurns: 1,
@@ -75,7 +75,10 @@ class _daftarkamarState extends State<daftarkamar> {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(
+                Icons.add,
+                color: Colors.black,
+                size: 40.0,),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -218,10 +221,8 @@ class _daftarkamarState extends State<daftarkamar> {
                               elevation: 0,
                             ),
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10.0),
-                              width: 1000,
                               decoration: BoxDecoration(
-                                color: Colors.yellow[100],
+                                color: Colors.yellow[200],
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,

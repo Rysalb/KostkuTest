@@ -13,6 +13,8 @@ class detailpenyewa extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepOrange,
+        elevation: 0,
         title: Text('Detail Penyewa'),
       ),
       body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(

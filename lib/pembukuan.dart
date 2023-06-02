@@ -62,6 +62,11 @@ class _pembukuanState extends State<pembukuan> {
           ),
           actions: [
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                foregroundColor: Colors.blue,
+                elevation: 0,
+              ),
               onPressed: () async {
                 QuerySnapshot snapshot = await FirebaseFirestore.instance
                     .collection('fasilitas')
@@ -128,7 +133,7 @@ class _pembukuanState extends State<pembukuan> {
               Padding(
                 padding: const EdgeInsets.only(left: 2.0),
                 child: Text(
-                  'Laporan Keuangan',
+                  'Pembukuan',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -181,10 +186,11 @@ class _pembukuanState extends State<pembukuan> {
 
                       return Container(
                         padding: const EdgeInsets.only(top: 10, bottom: 10.0),
-                        margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                        margin: new EdgeInsets.symmetric(horizontal: 5.0),
                         width: 1000,
                         decoration: new BoxDecoration(
-                          color: Colors.yellow[100],
+                          color: Colors.yellow[200],
+                      borderRadius: BorderRadius.circular(5)
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -245,6 +251,7 @@ class _pembukuanState extends State<pembukuan> {
                           ],
                         ),
                       );
+
                     },
                   ),
                   SizedBox(height: 10),

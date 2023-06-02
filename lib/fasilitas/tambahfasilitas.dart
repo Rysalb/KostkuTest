@@ -18,7 +18,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
     return Scaffold(
 
       appBar: AppBar(
-        backgroundColor: Colors.red,
+          backgroundColor: Colors.orangeAccent[700],
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

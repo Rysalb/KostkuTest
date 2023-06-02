@@ -28,7 +28,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.orangeAccent[700],
         elevation: 0,
         leading: IconButton(
           icon: Icon(
@@ -119,10 +119,11 @@ class _DataPenyewaState extends State<DataPenyewa> {
 
                     child: Container(
                       margin: EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10.0),
+                          horizontal: 5, vertical: 5),
                       width: 1000,
                       decoration: BoxDecoration(
-                        color: Colors.yellow[100],
+                        color: Colors.yellow[200],
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -142,22 +143,10 @@ class _DataPenyewaState extends State<DataPenyewa> {
                           if (penyewaDoc != null) ...[
                             Row(
                               children: [
-                                Container(
-                                  child: Image.network(
-                                    penyewaDoc['img'] ,
-                                    // Menggunakan link gambar dari penyewaDoc['img']
-                                    width: 100,
-                                    height: 100,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    'Nama : ',
+                                    'Nama                   : ',
                                     style: TextStyle(
                                       color: Colors.black45,
                                       fontSize: 15,
@@ -182,7 +171,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    'Tanggal Masuk: ',
+                                    'Tanggal Masuk  : ',
                                     style: TextStyle(
                                       color: Colors.black45,
                                       fontSize: 15,
@@ -208,7 +197,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    'Nomor HP: ',
+                                    'Nomor HP           : ',
                                     style: TextStyle(
                                       color: Colors.black45,
                                       fontSize: 15,
@@ -233,7 +222,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    'Status: ',
+                                    'Status                  : ',
                                     style: TextStyle(
                                       color: Colors.black45,
                                       fontSize: 15,
@@ -267,6 +256,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                               ],
                             ),
                             ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.grey, // Background color
+                              ),
                               onPressed: () {
                                 showDialog(
                                   context: context,
@@ -317,6 +309,11 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                               },
                                             ),
                                             ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.transparent,
+                                                foregroundColor: Colors.blue,
+                                                elevation: 0,
+                                              ),
                                               onPressed: () {
                                                 tanggalBayar = DateTime.now();
                                                 tanggalMasuk = DateTime.now();
