@@ -28,7 +28,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        backgroundColor: Colors.orangeAccent[700],
+        backgroundColor: Colors.deepOrange,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
@@ -114,241 +114,369 @@ class _DataPenyewaState extends State<DataPenyewa> {
                           ),
                         );
                       }
-
                     },
-
                     child: Container(
                       margin: EdgeInsets.symmetric(
-                          horizontal: 5, vertical: 5),
+                          horizontal: 10.0, vertical: 10.0),
                       width: 1000,
                       decoration: BoxDecoration(
-                        color: Colors.yellow[200],
-                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.yellow[100],
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Text(
-                              'Kamar No ${kamarDoc['id']}',
-                              style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          if (penyewaDoc != null) ...[
-                            Row(
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    'Nama                   : ',
+                                    'Kamar No ${kamarDoc['id']}',
                                     style: TextStyle(
                                       color: Colors.black45,
-                                      fontSize: 15,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  child: Text(
-                                    '${penyewaDoc['nama']}',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'Tanggal Masuk  : ',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
-                                    DateFormat('dd MMM yyyy').format(
-                                        penyewaDoc['tanggal_masuk'].toDate()),
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'Nomor HP           : ',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
-                                    '${penyewaDoc['nomor_hp']}',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Text(
-                                    'Status                  : ',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: penyewaDoc['status']
-                                        ? Colors.green
-                                        : Colors.red,
-                                    // Menentukan warna berdasarkan status
-                                    borderRadius: BorderRadius.circular(
-                                        5.0), // Memberikan border radius pada container
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 5.0, vertical: 2.0),
-                                  // Memberikan padding pada container
-                                  child: Text(
-                                    penyewaDoc['status']
-                                        ? 'Sudah Bayar'
-                                        : 'Belum Bayar',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.grey, // Background color
-                              ),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              'Tambah Data Penyewa',
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(height: 20),
-                                            TextField(
-                                              controller: namaController,
-                                              decoration: InputDecoration(
-                                                labelText: 'Nama',
-                                              ),
-                                            ),
-                                            TextField(
-                                              controller: nominalController,
-                                              decoration: InputDecoration(
-                                                labelText: 'Nominal',
-                                              ),
-                                              keyboardType:
-                                              TextInputType.number,
-                                            ),
-                                            TextField(
-                                              controller: nomorHPController,
-                                              decoration: InputDecoration(
-                                                labelText: 'Nomor HP',
-                                              ),
-                                              keyboardType:
-                                              TextInputType.number,
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Status'),
-                                              value: status,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  status = value!;
-                                                });
-                                              },
-                                            ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.transparent,
-                                                foregroundColor: Colors.blue,
-                                                elevation: 0,
-                                              ),
-                                              onPressed: () {
-                                                tanggalBayar = DateTime.now();
-                                                tanggalMasuk = DateTime.now();
-                                                imgURL = "";
-                                                tambahDataPenyewa(
-                                                    kamarDoc['id']);
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Simpan'),
-                                            ),
-                                            SizedBox(height: 20),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                getImage();
-                                              },
-                                              child: Text('Upload Gambar'),
-                                            ),
-                                            SizedBox(height: 20),
-                                            if (selectedImage != null) ...[
-                                              Image.file(
-                                                selectedImage!,
-                                                height: 200,
-                                              ),
-                                            ],
-                                          ],
+                                if (penyewaDoc != null) ...[
+                                  Row(
+                                    children: [
+                                      Container(
+                                        child: Image.network(
+                                          penyewaDoc['img'],
+                                          // Menggunakan link gambar dari penyewaDoc['img']
+                                          width: 100,
+                                          height: 100,
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'Nama : ',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '${penyewaDoc['nama']}',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'Tanggal Masuk: ',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          DateFormat('dd MMM yyyy').format(
+                                              penyewaDoc['tanggal_masuk'].toDate()),
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'Nomor HP: ',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '${penyewaDoc['nomor_hp']}',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'Status: ',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: penyewaDoc['status']
+                                              ? Colors.green
+                                              : Colors.red,
+                                          // Menentukan warna berdasarkan status
+                                          borderRadius: BorderRadius.circular(
+                                              5.0), // Memberikan border radius pada container
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.0, vertical: 2.0),
+                                        // Memberikan padding pada container
+                                        child: Text(
+                                          penyewaDoc['status']
+                                              ? 'Sudah Bayar'
+                                              : 'Belum Bayar',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                          if (penyewaDoc != null)...[
+                            Column(
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height * 0.35,
+                                    width: MediaQuery.of(context).size.width * 0.1,
+                                    color: Colors.blue,
+                                    child: Center(
+                                      child: Text(
+                                        'Rubah',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Dialog(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  'Rubah Data Penyewa',
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 20),
+                                                TextField(
+                                                  controller: namaController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nama',
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  controller: nominalController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nominal',
+                                                  ),
+                                                  keyboardType:
+                                                  TextInputType.number,
+                                                ),
+                                                TextField(
+                                                  controller: nomorHPController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nomor HP',
+                                                  ),
+                                                  keyboardType:
+                                                  TextInputType.number,
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Status'),
+                                                  value: status,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      status = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    tanggalBayar = DateTime.now();
+                                                    tanggalMasuk = DateTime.now();
+                                                    imgURL = "";
+                                                    tambahDataPenyewa(
+                                                        kamarDoc['id']);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Simpan'),
+                                                ),
+                                                SizedBox(height: 20),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    getImage();
+                                                  },
+                                                  child: Text('Upload Gambar'),
+                                                ),
+                                                SizedBox(height: 20),
+                                                if (selectedImage != null) ...[
+                                                  Image.file(
+                                                    selectedImage!,
+                                                    height: 200,
+                                                  ),
+                                                ],
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     );
                                   },
-                                );
-                              },
-                              child: Text('Rubah Penyewa'),
-                            ),
-                          ],
+                                ),
+                              ],
+                            ),],
+                          if (penyewaDoc == null)...[
+                            Column(
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height * 0.05,
+                                    width: MediaQuery.of(context).size.width * 0.15,
+                                    color: Colors.blue,
+                                    child: Center(
+                                      child: Text(
+                                        'Tambah',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Dialog(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  'Tambah Data Penyewa',
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 20),
+                                                TextField(
+                                                  controller: namaController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nama',
+                                                  ),
+                                                ),
+                                                TextField(
+                                                  controller: nominalController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nominal',
+                                                  ),
+                                                  keyboardType:
+                                                  TextInputType.number,
+                                                ),
+                                                TextField(
+                                                  controller: nomorHPController,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nomor HP',
+                                                  ),
+                                                  keyboardType:
+                                                  TextInputType.number,
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Status'),
+                                                  value: status,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      status = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    tanggalBayar = DateTime.now();
+                                                    tanggalMasuk = DateTime.now();
+                                                    imgURL = "";
+                                                    tambahDataPenyewa(
+                                                        kamarDoc['id']);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('Simpan'),
+                                                ),
+                                                SizedBox(height: 20),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    getImage();
+                                                  },
+                                                  child: Text('Upload Gambar'),
+                                                ),
+                                                SizedBox(height: 20),
+                                                if (selectedImage != null) ...[
+                                                  Image.file(
+                                                    selectedImage!,
+                                                    height: 200,
+                                                  ),
+                                                ],
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),],
                         ],
+
                       ),
                     ),
                   );

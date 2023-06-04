@@ -154,7 +154,7 @@ class _daftarkamarState extends State<daftarkamar> {
                             if (imageFile != null) {
                               String? downloadURL = await _uploadImage(imageFile!);
                               QuerySnapshot snapshot = await FirebaseFirestore.instance
-                                  .collection('fasilitas')
+                                  .collection('kamar')
                                   .get();
 
                               int totalData = snapshot.size;
