@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projectmppl/home.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
+import 'package:image_picker/image_picker.dart';
 
 class tambahfasilitas extends StatefulWidget {
   @override
@@ -12,27 +17,48 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
   TextEditingController _hargaController = TextEditingController();
   TextEditingController _unitController = TextEditingController();
   TextEditingController _kondisiController = TextEditingController();
+  File? _image;
+
+  Future<void> _selectImage() async {
+    final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+  }
+
+  Future<String> _uploadImage(String imageName) async {
+    if (_image != null) {
+      firebase_storage.Reference ref =
+      firebase_storage.FirebaseStorage.instance.ref().child('Fasilitas/$imageName');
+      firebase_storage.UploadTask uploadTask = ref.putFile(_image!);
+      await uploadTask.whenComplete(() => null);
+      String downloadURL = await ref.getDownloadURL();
+      return downloadURL;
+    }
+    return '';
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-          backgroundColor: Colors.orangeAccent[700],
+        backgroundColor: Colors.orangeAccent[700],
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => home()),
-            );// Kembali ke halaman sebelumnya
+            ); // Kembali ke halaman sebelumnya
           },
         ),
         title: Text(
-          'Tambah Fasilitas',
+          'Fasilitas',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         toolbarHeight: 80,
@@ -43,25 +69,22 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
             onPressed: () {
               _showAddFormDialog(context); // Tampilkan form tambah data
             },
+            color: Colors.white, // Ubah warna ikon
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Container(
-          // ...
           child: Column(
-            // ...
             children: <Widget>[
-              // ...
               StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('fasilitas')
-                    .snapshots(),
+                stream: FirebaseFirestore.instance.collection('fasilitas').snapshots(),
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData && snapshot.data != null) {
                     // Process and display the data from the snapshot
                     return ListView.builder(
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         DocumentSnapshot document = snapshot.data!.docs[index];
@@ -69,9 +92,19 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                         int harga = document['harga'];
 
                         // Widget untuk menampilkan data
-                        return ListTile(
-                          title: Text(nama),
-                          subtitle: Text('Harga: $harga'),
+                        return Card(
+                          elevation: 2,
+                          child: ListTile(
+                            leading: Image.network(document['img']),
+                            title: Text(nama),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Unit: ${document['unit']}'),
+                                Text('Kondisi: ${document['kondisi']}'),
+                              ],
+                            ),
+                          ),
                         );
                       },
                     );
@@ -86,8 +119,6 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                   }
                 },
               ),
-
-              // ...
             ],
           ),
         ),
@@ -130,6 +161,15 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                   labelText: 'Kondisi',
                 ),
               ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  _selectImage(); // Mengambil gambar dari galeri
+                },
+                child: Text('Unggah Gambar'),
+              ),
+              if (_image != null) // Menampilkan gambar terpilih
+                Image.file(_image!),
             ],
           ),
           actions: [
@@ -151,15 +191,17 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
     int harga = int.tryParse(_hargaController.text) ?? 0;
     int unit = int.tryParse(_unitController.text) ?? 0;
     String kondisi = _kondisiController.text;
-    QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection('fasilitas')
-        .get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('fasilitas').get();
 
     int totalData = snapshot.size;
-    // Lakukan logika tambah data ke koleksi fasilitas
-    // Misalnya:
+
+    // Mengunggah gambar dan mendapatkan URL gambar yang diunggah
+    String imageUrl = await _uploadImage('fasilitas_${totalData + 1}');
+
+    // Menambahkan data ke koleksi fasilitas
     FirebaseFirestore.instance.collection('fasilitas').add({
-      'id' : totalData +1,
+      'id': totalData + 1,
+      'img': imageUrl,
       'nama': nama,
       'harga': harga,
       'unit': unit,

@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
+
 class DataPenyewa extends StatefulWidget {
   @override
   State<DataPenyewa> createState() => _DataPenyewaState();
@@ -18,7 +19,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
   TextEditingController nominalController = TextEditingController();
   TextEditingController nomorHPController = TextEditingController();
   bool status = false;
-  DateTime? tanggalBayar;
+  DateTime? tanggalKeluar;
   DateTime? tanggalMasuk;
   String imgURL = "";
   File? selectedImage;
@@ -340,7 +341,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () {
-                                                    tanggalBayar = DateTime.now();
+                                                    tanggalKeluar = DateTime.now();
                                                     tanggalMasuk = DateTime.now();
                                                     imgURL = "";
                                                     tambahDataPenyewa(
@@ -442,7 +443,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () {
-                                                    tanggalBayar = DateTime.now();
+                                                    tanggalKeluar = DateTime.now();
                                                     tanggalMasuk = DateTime.now();
                                                     imgURL = "";
                                                     tambahDataPenyewa(
@@ -518,7 +519,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
         'nominal': nominal,
         'nomor_hp': nomorHP,
         'status': status,
-        'tanggal_bayar': tanggalBayar,
+        'tanggal_keluar': tanggalKeluar,
         'tanggal_masuk': tanggalMasuk,
         'img': imageUrl,
       };
