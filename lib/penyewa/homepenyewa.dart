@@ -3,6 +3,9 @@ import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
 import 'package:projectmppl/profile/profile.dart';
 import '../chat.dart';
 import '../home.dart';
+import 'fasilitaspenyewa.dart';
+import 'lihatkamar.dart';
+import 'pembayaran.dart';
 
 class homepenyewa extends StatefulWidget {
   @override
@@ -84,6 +87,10 @@ class _homepenyewaState extends State<homepenyewa> {
                         children: [
                           MaterialButton(
                             onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => lihatkamar()),
+                              );
                             },
                             child: Container(
                               width: double.infinity,
@@ -138,7 +145,6 @@ class _homepenyewaState extends State<homepenyewa> {
                                       fontSize: 25,
                                     ),
                                   ),
-
                                 ],
                               ),
                             ),
@@ -164,6 +170,10 @@ class _homepenyewaState extends State<homepenyewa> {
                         children: [
                           MaterialButton(
                             onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => pembayaran()),
+                              );
                             },
                             child: Container(
                               width: double.infinity,
@@ -196,6 +206,10 @@ class _homepenyewaState extends State<homepenyewa> {
                           Container(
                             child: MaterialButton(
                               onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => fasilitaspenyewa()),
+                                );
                               },
                               child: Container(
                                 width: double.infinity,

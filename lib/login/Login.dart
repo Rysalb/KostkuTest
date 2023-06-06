@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectmppl/home.dart';
 import 'package:projectmppl/penyewa/loginpenyewa.dart';
+import 'package:projectmppl/penyewa/homepenyewa.dart';
 import 'daftarakun.dart';
 import 'lupapass.dart';
 
@@ -51,8 +52,8 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => loginpenyewa()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => homepenyewa()));
                       },
                       child: Stack(
                         children: [
@@ -142,7 +143,8 @@ class _LoginState extends State<Login> {
                         MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => daftarakun()));
+                                MaterialPageRoute(
+                                    builder: (context) => daftarakun()));
                           },
                           child: Text(
                             'Daftar Akun',
@@ -156,7 +158,8 @@ class _LoginState extends State<Login> {
                         MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => lupapass()));
+                                MaterialPageRoute(
+                                    builder: (context) => lupapass()));
                           },
                           child: Text(
                             'Lupa Password',
@@ -179,10 +182,11 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           auth
                               .signInWithEmailAndPassword(
-                              email: _email, password: _pass)
+                                  email: _email, password: _pass)
                               .then((_) {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => home()));
+                                MaterialPageRoute(
+                                    builder: (context) => home()));
                           });
                         },
                         child: RotatedBox(
