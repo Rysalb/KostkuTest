@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
-import 'package:projectmppl/home.dart';
-import 'homepenyewa.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
+import 'package:projectmppl/penyewa/homepenyewa.dart';
 
 class lihatkamar extends StatefulWidget {
   @override
@@ -13,158 +13,260 @@ class lihatkamar extends StatefulWidget {
 
 class _lihatkamarState extends State<lihatkamar> {
   TextEditingController namaController = TextEditingController();
-  TextEditingController tipeController = TextEditingController();
-  File? imageFile;
-
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedImage = await ImagePicker().getImage(source: source);
-    if (pickedImage != null) {
-      setState(() {
-        imageFile = File(pickedImage.path);
-      });
-    }
-  }
-
-  Future<String?> _uploadImage(File image) async {
-    try {
-      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
-          .ref('Kamar/${DateTime.now().millisecondsSinceEpoch.toString()}.jpg');
-      firebase_storage.UploadTask uploadTask = ref.putFile(image);
-      firebase_storage.TaskSnapshot snapshot = await uploadTask;
-      String downloadURL = await snapshot.ref.getDownloadURL();
-      return downloadURL;
-    } catch (e) {
-      print('Error uploading image: $e');
-      return null;
-    }
-  }
+  TextEditingController nominalController = TextEditingController();
+  TextEditingController nomorHPController = TextEditingController();
+  bool status = false;
+  DateTime? tanggalKeluar;
+  DateTime? tanggalMasuk;
+  String imgURL = "";
+  File? selectedImage;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.orangeAccent[700],
-          elevation: 0,
-          toolbarHeight: 80,
-          leading: IconButton(
-            icon: RotatedBox(
-              quarterTurns: 1,
-              child: Icon(
-                Icons.arrow_downward,
-                color: Colors.black,
-                size: 50.0,
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 100,
+        backgroundColor: Colors.deepOrange,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 30.0,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => homepenyewa()),
+            );
+          },
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'KostKu',
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => homepenyewa()),
-              );
-            },
-          ),
-          title: Text(
-            'Daftar Kamar',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 10),
-                StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('kamar')
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          var document = snapshot.data!.docs[index];
-                          var id = document['id'];
-                          var img = document['img'];
-                          var nama = document['nama'];
-                          var kelas = document['tipe'];
-
-                          return ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  icon: Image.network(
-                                    img,
-                                    width: 100,
-                                    height: 100,
-                                  ),
-                                  title: Text('Kamar Nomor $id'),
-                                  content: Text('Tipe kamar $kelas'),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              foregroundColor: Colors.black,
-                              elevation: 0,
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.yellow[200],
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5.0),
-                                    child: Image.network(
-                                      img,
-                                      width: 50,
-                                      height: 50,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, left: 15.0),
-                                    child: Text(
-                                      nama,
-                                      style: TextStyle(
-                                        color: Colors.black45,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
+            Padding(
+              padding: const EdgeInsets.only(left: 2.0),
+              child: Text(
+                'Data Penyewa',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 10),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('kamar').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+
+          QuerySnapshot kamarDocs = snapshot.data!;
+          return ListView.builder(
+            itemCount: kamarDocs.size,
+            itemBuilder: (context, index) {
+              DocumentSnapshot kamarDoc = kamarDocs.docs[index];
+              return StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('penyewa')
+                    .where('id_kamar', isEqualTo: kamarDoc['id'])
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  }
+
+                  if (!snapshot.hasData) {
+                    return CircularProgressIndicator();
+                  }
+
+                  QuerySnapshot penyewaDocs = snapshot.data!;
+                  DocumentSnapshot? penyewaDoc;
+
+                  if (penyewaDocs.size > 0) {
+                    // If there are tenants for this room, get the first tenant data
+                    penyewaDoc = penyewaDocs.docs[0];
+                  }
+
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      margin:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                      width: 1000,
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[100],
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Text(
+                                    'Kamar No ${kamarDoc['id']}',
+                                    style: TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                if (penyewaDoc != null) ...[
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'Nama : ',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '${penyewaDoc['nama']}',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5.0),
+                                        child: Text(
+                                          'Nomor HP: ',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '0${penyewaDoc['nomor_hp']}',
+                                          style: TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 100,
+                              child: InkWell(
+                                onTap: () {
+                                  // Show enlarged image here
+                                },
+                                child: Image.network(
+                                  kamarDoc['img'],
+                                  // Menggunakan link gambar dari penyewaDoc['img']
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
     );
+  }
+
+  void tambahDataPenyewa(int idKamar) async {
+    try {
+      String nama = namaController.text;
+      int nominal = int.parse(nominalController.text);
+      int nomorHP = int.parse(nomorHPController.text);
+
+      String imageName = path.basename(selectedImage!.path);
+      firebase_storage.Reference storageReference = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('KTP')
+          .child(imageName);
+
+      // Upload gambar ke Firebase Storage
+      await storageReference.putFile(selectedImage!);
+
+      // Dapatkan URL gambar yang diunggah
+      String imageUrl = await storageReference.getDownloadURL();
+      QuerySnapshot snapshot =
+      await FirebaseFirestore.instance.collection('penyewa').get();
+      int totalData = snapshot.size;
+
+      Map<String, dynamic> data = {
+        'id': totalData,
+        'id_kamar': idKamar,
+        'nama': nama,
+        'nominal': nominal,
+        'nomor_hp': nomorHP,
+        'status': status,
+        'tanggal_keluar': tanggalKeluar,
+        'tanggal_masuk': tanggalMasuk,
+        'img': imageUrl,
+      };
+
+      await FirebaseFirestore.instance.collection('penyewa').add(data);
+
+      setState(() {
+        namaController.clear();
+        nominalController.clear();
+        nomorHPController.clear();
+        status = false;
+        imgURL = "";
+      });
+    } catch (e) {
+      print('Error adding tenant data: $e');
+    }
+  }
+
+  Future<void> getImage() async {
+    final pickedImage =
+    await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        selectedImage = File(pickedImage.path);
+      });
+    }
   }
 }

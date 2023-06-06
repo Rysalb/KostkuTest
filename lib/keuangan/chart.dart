@@ -11,7 +11,6 @@ class ChartScreen extends StatefulWidget {
   _ChartScreenState createState() => _ChartScreenState();
 }
 
-
 class _ChartScreenState extends State<ChartScreen> {
   @override
   Widget build(BuildContext context) {
@@ -25,68 +24,106 @@ class _ChartScreenState extends State<ChartScreen> {
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => home()));
+              MaterialPageRoute(builder: (context) => home()),
+            );
           },
         ),
-        title: const Text('Grafik Pemasukan dan Pengeluaran'),
+        title: const Text('Grafik Keuangan'),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('keuangan').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final data = snapshot.data!.docs;
-            final pemasukan = data.where((doc) => doc['status'] == true);
-            final pengeluaran = data.where((doc) => doc['status'] == false);
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.deepOrangeAccent, Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('keuangan').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.data!.docs;
+              final pemasukan = data.where((doc) => doc['status'] == true);
+              final pengeluaran = data.where((doc) => doc['status'] == false);
 
-            final chartData = [
-              ChartData('Pemasukan', pemasukan.length),
-              ChartData('Pengeluaran', pengeluaran.length),
-            ];
+              // Menghitung total pemasukan dan pengeluaran
+              int totalPemasukan = 0;
+              int totalPengeluaran = 0;
+              for (var doc in pemasukan) {
+                totalPemasukan += int.parse(doc['biaya'].toString());
+              }
+              for (var doc in pengeluaran) {
+                totalPengeluaran += int.parse(doc['biaya'].toString());
+              }
 
-            // Menghitung total pemasukan dan pengeluaran
-            int totalPemasukan = 0;
-            int totalPengeluaran = 0;
-            for (var doc in pemasukan) {
-              totalPemasukan += int.parse(doc['biaya'].toString());
-            }
-            for (var doc in pengeluaran) {
-              totalPengeluaran += int.parse(doc['biaya'].toString());
-            }
+              final chartData = [
+                ChartData('Pemasukan', totalPemasukan),
+                ChartData('Pengeluaran', totalPengeluaran),
+              ];
 
-            final totalSaldo = totalPemasukan - totalPengeluaran;
+              final totalSaldo = totalPemasukan - totalPengeluaran;
 
-            return Column(
-              children: [
-                SizedBox(
-                  height: 400,
-                  child: SfCircularChart(
-                    series: <CircularSeries>[
-                      PieSeries<ChartData, String>(
-                        dataSource: chartData,
-                        xValueMapper: (ChartData data, _) => data.label,
-                        yValueMapper: (ChartData data, _) => data.value,
-                        dataLabelMapper: (ChartData data, _) => '${data.value}',
-                        dataLabelSettings: DataLabelSettings(
-                          isVisible: true,
-                        ),
-                      )
-                    ],
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 400,
+                    child: SfCircularChart(
+                      series: <CircularSeries>[
+                        PieSeries<ChartData, String>(
+                          dataSource: chartData,
+                          xValueMapper: (ChartData data, _) => data.label,
+                          yValueMapper: (ChartData data, _) => data.value,
+                          dataLabelMapper: (ChartData data, _) =>
+                          '${data.value}',
+                          dataLabelSettings: DataLabelSettings(
+                            isVisible: true,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Text('Total Pemasukan: $totalPemasukan'),
-                Text('Total Pengeluaran: $totalPengeluaran'),
-                Text('Total Saldo: $totalSaldo'),
-              ],
-            );
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
+                  SizedBox(height: 20),
+                  Container(
+                    color: Colors.blue,
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Total Pemasukan: $totalPemasukan',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    color: Colors.red,
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Total Pengeluaran: $totalPengeluaran',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Total Saldo: $totalSaldo',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }
 }
-
 
 class ChartData {
   final String label;

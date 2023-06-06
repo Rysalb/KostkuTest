@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'homepenyewa.dart';
+import 'package:projectmppl/home.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
+import 'package:image_picker/image_picker.dart';
+import 'package:projectmppl/penyewa/homepenyewa.dart';
 
 class fasilitaspenyewa extends StatefulWidget {
   @override
@@ -12,6 +18,28 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
   TextEditingController _hargaController = TextEditingController();
   TextEditingController _unitController = TextEditingController();
   TextEditingController _kondisiController = TextEditingController();
+  File? _image;
+
+  Future<void> _selectImage() async {
+    final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+  }
+
+  Future<String> _uploadImage(String imageName) async {
+    if (_image != null) {
+      firebase_storage.Reference ref =
+      firebase_storage.FirebaseStorage.instance.ref().child('Fasilitas/$imageName');
+      firebase_storage.UploadTask uploadTask = ref.putFile(_image!);
+      await uploadTask.whenComplete(() => null);
+      String downloadURL = await ref.getDownloadURL();
+      return downloadURL;
+    }
+    return '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +59,7 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         toolbarHeight: 80,
@@ -39,21 +67,16 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          // ...
           child: Column(
-            // ...
             children: <Widget>[
-              // ...
               StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('fasilitas')
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                stream: FirebaseFirestore.instance.collection('fasilitas').snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData && snapshot.data != null) {
                     // Process and display the data from the snapshot
                     return ListView.builder(
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         DocumentSnapshot document = snapshot.data!.docs[index];
@@ -61,9 +84,19 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
                         int harga = document['harga'];
 
                         // Widget untuk menampilkan data
-                        return ListTile(
-                          title: Text(nama),
-                          subtitle: Text('Harga: $harga'),
+                        return Card(
+                          elevation: 2,
+                          child: ListTile(
+                            leading: Image.network(document['img']),
+                            title: Text(nama),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Unit: ${document['unit']}'),
+                                Text('Kondisi: ${document['kondisi']}'),
+                              ],
+                            ),
+                          ),
                         );
                       },
                     );
@@ -78,12 +111,70 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
                   }
                 },
               ),
-
-              // ...
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showAddFormDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Tambah Data Fasilitas'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _namaController,
+                decoration: InputDecoration(
+                  labelText: 'Nama',
+                ),
+              ),
+              TextField(
+                controller: _hargaController,
+                decoration: InputDecoration(
+                  labelText: 'Harga',
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              TextField(
+                controller: _unitController,
+                decoration: InputDecoration(
+                  labelText: 'Unit',
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              TextField(
+                controller: _kondisiController,
+                decoration: InputDecoration(
+                  labelText: 'Kondisi',
+                ),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () {
+                  _selectImage(); // Mengambil gambar dari galeri
+                },
+                child: Text('Unggah Gambar'),
+              ),
+              if (_image != null) // Menampilkan gambar terpilih
+                Image.file(_image!),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _addDataToFasilitas(); // Tambahkan data ke koleksi fasilitas
+                Navigator.pop(context); // Tutup dialog
+              },
+              child: Text('Tambah'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -92,14 +183,17 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
     int harga = int.tryParse(_hargaController.text) ?? 0;
     int unit = int.tryParse(_unitController.text) ?? 0;
     String kondisi = _kondisiController.text;
-    QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('fasilitas').get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('fasilitas').get();
 
     int totalData = snapshot.size;
-    // Lakukan logika tambah data ke koleksi fasilitas
-    // Misalnya:
+
+    // Mengunggah gambar dan mendapatkan URL gambar yang diunggah
+    String imageUrl = await _uploadImage('fasilitas_${totalData + 1}');
+
+    // Menambahkan data ke koleksi fasilitas
     FirebaseFirestore.instance.collection('fasilitas').add({
       'id': totalData + 1,
+      'img': imageUrl,
       'nama': nama,
       'harga': harga,
       'unit': unit,
