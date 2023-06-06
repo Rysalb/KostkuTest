@@ -396,83 +396,134 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
-                                        return Dialog(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                  'Tambah Data Penyewa',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
+                                        return StatefulBuilder(
+                                          builder: (context, setState) {
+                                            return Dialog(
+                                              child: SingleChildScrollView(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(20.0),
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        'Tambah Data Penyewa',
+                                                        style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      TextField(
+                                                        controller: namaController,
+                                                        decoration: InputDecoration(
+                                                          labelText: 'Nama',
+                                                        ),
+                                                      ),
+                                                      TextField(
+                                                        controller: nominalController,
+                                                        decoration: InputDecoration(
+                                                          labelText: 'Nominal',
+                                                        ),
+                                                        keyboardType: TextInputType.number,
+                                                      ),
+                                                      TextField(
+                                                        controller: nomorHPController,
+                                                        decoration: InputDecoration(
+                                                          labelText: 'Nomor HP',
+                                                        ),
+                                                        keyboardType: TextInputType.number,
+                                                      ),
+                                                      CheckboxListTile(
+                                                        title: Text('Status'),
+                                                        value: status,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            status = value!;
+                                                          });
+                                                        },
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      Text('Tanggal Masuk'),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          showDatePicker(
+                                                            context: context,
+                                                            initialDate: tanggalMasuk ?? DateTime.now(),
+                                                            firstDate: DateTime(2000),
+                                                            lastDate: DateTime(2100),
+                                                          ).then((date) {
+                                                            if (date != null) {
+                                                              setState(() {
+                                                                tanggalMasuk = date;
+                                                              });
+                                                            }
+                                                          });
+                                                        },
+                                                        child: Text(
+                                                          tanggalMasuk != null
+                                                              ? DateFormat('dd-MM-yyyy').format(tanggalMasuk!)
+                                                              : 'Pilih Tanggal Masuk',
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      Text('Tanggal Keluar'),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          showDatePicker(
+                                                            context: context,
+                                                            initialDate: tanggalKeluar ?? DateTime.now(),
+                                                            firstDate: DateTime(2000),
+                                                            lastDate: DateTime(2100),
+                                                          ).then((date) {
+                                                            if (date != null) {
+                                                              setState(() {
+                                                                tanggalKeluar = date;
+                                                              });
+                                                            }
+                                                          });
+                                                        },
+                                                        child: Text(
+                                                          tanggalKeluar != null
+                                                              ? DateFormat('dd-MM-yyyy').format(tanggalKeluar!)
+                                                              : 'Pilih Tanggal Keluar',
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          imgURL = "";
+                                                          tambahDataPenyewa(kamarDoc['id']);
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                        child: Text('Simpan'),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          getImage().then((_) {
+                                                            setState(() {}); // Memperbarui tampilan dialog setelah mengunggah gambar
+                                                          });
+                                                        },
+                                                        child: Text('Upload Gambar'),
+                                                      ),
+                                                      SizedBox(height: 20),
+                                                      if (selectedImage != null) ...[
+                                                        Image.file(
+                                                          selectedImage!,
+                                                          height: 200,
+                                                        ),
+                                                      ],
+                                                    ],
                                                   ),
                                                 ),
-                                                SizedBox(height: 20),
-                                                TextField(
-                                                  controller: namaController,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Nama',
-                                                  ),
-                                                ),
-                                                TextField(
-                                                  controller: nominalController,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Nominal',
-                                                  ),
-                                                  keyboardType:
-                                                  TextInputType.number,
-                                                ),
-                                                TextField(
-                                                  controller: nomorHPController,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Nomor HP',
-                                                  ),
-                                                  keyboardType:
-                                                  TextInputType.number,
-                                                ),
-                                                CheckboxListTile(
-                                                  title: Text('Status'),
-                                                  value: status,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      status = value!;
-                                                    });
-                                                  },
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    tanggalKeluar = DateTime.now();
-                                                    tanggalMasuk = DateTime.now();
-                                                    imgURL = "";
-                                                    tambahDataPenyewa(
-                                                        kamarDoc['id']);
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text('Simpan'),
-                                                ),
-                                                SizedBox(height: 20),
-                                                ElevatedButton(
-                                                  onPressed: () {
-                                                    getImage();
-                                                  },
-                                                  child: Text('Upload Gambar'),
-                                                ),
-                                                SizedBox(height: 20),
-                                                if (selectedImage != null) ...[
-                                                  Image.file(
-                                                    selectedImage!,
-                                                    height: 200,
-                                                  ),
-                                                ],
-                                              ],
-                                            ),
-                                          ),
+                                              ),
+                                            );
+                                          },
                                         );
                                       },
                                     );
                                   },
+
                                 ),
                               ],
                             ),],
