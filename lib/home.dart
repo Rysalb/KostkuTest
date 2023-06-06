@@ -234,7 +234,7 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => daftarkamar()),
+                                MaterialPageRoute(builder: (context) => DaftarKamar()),
                               );
                             },
                             child: Container(

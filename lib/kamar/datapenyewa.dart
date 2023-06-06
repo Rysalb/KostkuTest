@@ -109,7 +109,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => detailpenyewa(
+                            builder: (context) => DetailPenyewa(
                               penyewaDoc: penyewaDoc!['id'],
                             ),
                           ),

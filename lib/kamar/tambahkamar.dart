@@ -32,7 +32,7 @@ class _tambahkamarState extends State<tambahkamar> {
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => daftarkamar()));
+                  MaterialPageRoute(builder: (context) => DaftarKamar()));
             },
           ),
           title: Text(
