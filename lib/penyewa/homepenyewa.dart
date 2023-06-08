@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectmppl/login/Login.dart';
 import 'package:projectmppl/penyewa/kalender.dart';
 import 'package:projectmppl/profile/profile.dart';
 import '../chat.dart';
@@ -31,7 +32,7 @@ class _homepenyewaState extends State<homepenyewa> {
         break;
       case 2:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => profile()),
+          MaterialPageRoute(builder: (context) => Login()),
         );
         break;
     }
@@ -274,8 +275,8 @@ class _homepenyewaState extends State<homepenyewa> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Account',
+              icon: Icon(Icons.login),
+              label: 'login',
             ),
           ],
           type: BottomNavigationBarType.fixed,

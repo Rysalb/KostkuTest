@@ -3,7 +3,7 @@ import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
 import 'package:projectmppl/keuangan/chart.dart';
 import 'package:projectmppl/profile/profile.dart';
 import 'chat.dart';
-import 'pembukuan.dart';
+import 'keuangan/pembukuan.dart';
 import 'kamar/daftarkamar.dart';
 import 'kamar/datapenyewa.dart';
 
@@ -21,7 +21,7 @@ class _homeState extends State<home> {
     });
     switch (index) {
       case 0:
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => chat()),
         );
         break;
@@ -32,7 +32,7 @@ class _homeState extends State<home> {
         break;
       case 2:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => profile()),
+          MaterialPageRoute(builder: (context) => Profile()),
         );
         break;
     }

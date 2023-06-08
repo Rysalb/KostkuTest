@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:projectmppl/penyewa/homepenyewa.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -88,125 +87,6 @@ class _KalenderState extends State<Kalender> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _kamarList.length,
-                itemBuilder: (context, index) {
-                  Map<String, dynamic> kamar = _kamarList[index];
-                  return StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('penyewa')
-                        .where('id_kamar', isEqualTo: kamar['id'])
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      }
-
-                      if (!snapshot.hasData) {
-                        return CircularProgressIndicator();
-                      }
-
-                      QuerySnapshot penyewaDocs = snapshot.data!;
-                      DocumentSnapshot? penyewaDoc;
-
-                      if (penyewaDocs.size > 0) {
-                        // If there are tenants for this room, get the first tenant data
-                        penyewaDoc = penyewaDocs.docs[0];
-                      }
-
-                      return GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin:
-                          EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                          width: 1000,
-                          decoration: BoxDecoration(
-                            color: Colors.yellow[100],
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 5.0),
-                                      child: Text(
-                                        'Kamar No ${kamar['id']}',
-                                        style: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    if (penyewaDoc != null) ...[
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 5.0),
-                                            child: Text(
-                                              'Nama : ',
-                                              style: TextStyle(
-                                                color: Colors.black45,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Text(
-                                              '${penyewaDoc['nama']}',
-                                              style: TextStyle(
-                                                color: Colors.black45,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 5.0),
-                                            child: Text(
-                                              'Nomor HP: ',
-                                              style: TextStyle(
-                                                color: Colors.black45,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Text(
-                                              '0${penyewaDoc['nomor_hp']}',
-                                              style: TextStyle(
-                                                color: Colors.black45,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
               ),
             ),
           ],

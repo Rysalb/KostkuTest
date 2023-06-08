@@ -28,8 +28,7 @@ class _chatState extends State<chat> {
               size: 70.0,
             ),
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => home()));
+              Navigator.of(context).pop();
             },
           ),
           title: Column(

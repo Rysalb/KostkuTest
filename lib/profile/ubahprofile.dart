@@ -1,20 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:projectmppl/profile/profile.dart';
 
-
-class ubahprofile extends StatefulWidget {
-
+class UbahProfile extends StatefulWidget {
   @override
-  State<ubahprofile> createState() => _ubahprofileState();
+  State<UbahProfile> createState() => _UbahProfileState();
 }
 
-class _ubahprofileState extends State<ubahprofile> {
+class _UbahProfileState extends State<UbahProfile> {
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    GoogleSignInAccount? user = _googleSignIn.currentUser;
+    if (user != null) {
+      _usernameController.text = user.displayName ?? '';
+      // Since password cannot be retrieved, it can be left empty
+    }
+  }
+
+  void _updateProfile() {
+    // Perform the necessary logic to update the user's profile information
+    // Here, you can use the _googleSignIn object to update the profile
+
+    // Get the updated username and password values
+    String username = _usernameController.text;
+    String password = _passwordController.text;
+
+    // Perform the update operation
+    // ...
+
+    // Redirect back to the profile screen after the update
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => Profile()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white
+        color: Colors.white,
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -23,13 +63,14 @@ class _ubahprofileState extends State<ubahprofile> {
           elevation: 0,
           leading: IconButton(
             icon: Icon(
-                Icons.close,
-                color: Colors.black,
-                size: 50.0,
+              Icons.close,
+              color: Colors.black,
+              size: 50.0,
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => profile()));
+                MaterialPageRoute(builder: (context) => Profile()),
+              );
             },
           ),
         ),
@@ -59,6 +100,7 @@ class _ubahprofileState extends State<ubahprofile> {
                 ),
                 Container(
                   child: TextField(
+                    controller: _usernameController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -72,6 +114,7 @@ class _ubahprofileState extends State<ubahprofile> {
                 SizedBox(height: 10),
                 Container(
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
@@ -85,33 +128,30 @@ class _ubahprofileState extends State<ubahprofile> {
                 ),
                 Align(
                   alignment: Alignment.topRight,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(80))
-                      ),
-                      height: 90,
-                      width: 90,
-                      child: ElevatedButton(
-                        child: RotatedBox(
-                          quarterTurns: 3,
-                          child: Icon(
-                            Icons.arrow_downward,
-                            color: Colors.black,
-                            size: 60.0,
-                          ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(80)),
+                    ),
+                    height: 90,
+                    width: 90,
+                    child: ElevatedButton(
+                      child: RotatedBox(
+                        quarterTurns: 3,
+                        child: Icon(
+                          Icons.arrow_downward,
+                          color: Colors.black,
+                          size: 60.0,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => profile()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20), // <-- Radius
-                          ),
+                      ),
+                      onPressed: _updateProfile,
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                     ),
+                  ),
                 )
               ],
             ),
@@ -121,4 +161,3 @@ class _ubahprofileState extends State<ubahprofile> {
     );
   }
 }
-
