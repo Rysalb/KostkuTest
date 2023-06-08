@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
 import 'package:projectmppl/keuangan/chart.dart';
+import 'package:projectmppl/kontak.dart';
 import 'package:projectmppl/profile/profile.dart';
-import 'chat.dart';
+import 'penyewa/chat.dart';
 import 'keuangan/pembukuan.dart';
 import 'kamar/daftarkamar.dart';
 import 'kamar/datapenyewa.dart';
@@ -22,7 +23,7 @@ class _homeState extends State<home> {
     switch (index) {
       case 0:
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => chat()),
+          MaterialPageRoute(builder: (context) => kontak()),
         );
         break;
       case 1:
@@ -88,7 +89,8 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => DataPenyewa()),
+                                MaterialPageRoute(
+                                    builder: (context) => DataPenyewa()),
                               );
                             },
                             child: Container(
@@ -122,7 +124,8 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => pembukuan()),
+                                MaterialPageRoute(
+                                    builder: (context) => pembukuan()),
                               );
                             },
                             child: Container(
@@ -148,7 +151,6 @@ class _homeState extends State<home> {
                                       fontSize: 25,
                                     ),
                                   ),
-
                                 ],
                               ),
                             ),
@@ -158,7 +160,8 @@ class _homeState extends State<home> {
                             child: MaterialButton(
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (context) => tambahfasilitas()),
+                                  MaterialPageRoute(
+                                      builder: (context) => tambahfasilitas()),
                                 );
                               },
                               child: Container(
@@ -200,7 +203,8 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => ChartScreen()),
+                                MaterialPageRoute(
+                                    builder: (context) => ChartScreen()),
                               );
                             },
                             child: Container(
@@ -234,7 +238,8 @@ class _homeState extends State<home> {
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => DaftarKamar()),
+                                MaterialPageRoute(
+                                    builder: (context) => DaftarKamar()),
                               );
                             },
                             child: Container(
@@ -267,14 +272,14 @@ class _homeState extends State<home> {
                           SizedBox(height: 50),
                           Container(
                             child: Container(
-                                width: double.infinity,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
+                          ),
                         ],
                       ),
                     ),

@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:projectmppl/penyewa/homepenyewa.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'home.dart';
 
 class chat extends StatefulWidget {
-
   @override
   State<chat> createState() => _chatState();
 }
 
 class _chatState extends State<chat> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white
-      ),
+      decoration: BoxDecoration(color: Colors.white),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -28,24 +24,29 @@ class _chatState extends State<chat> {
               size: 70.0,
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => homepenyewa()));
             },
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('KostKu',style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left : 2.0),
-                child: Text('Contact',style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
+              Text(
+                'KostKu',
+                style: TextStyle(
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: Text(
+                  'Contact',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               )
             ],
@@ -64,16 +65,17 @@ class _chatState extends State<chat> {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        foregroundColor: Colors.black,
-                        elevation: 0,side: const BorderSide(
-                      width: 5.0,
-                      color: Colors.green,
-                    )
-                        ),
-                  onPressed: () {_wasyarif();},
-
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black,
+                      elevation: 0,
+                      side: const BorderSide(
+                        width: 5.0,
+                        color: Colors.green,
+                      )),
+                  onPressed: () {
+                    _wasyarif();
+                  },
                   child: Container(
                     margin: new EdgeInsets.symmetric(horizontal: 10.0),
                     width: 1000,
@@ -84,7 +86,8 @@ class _chatState extends State<chat> {
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top : 10, left: 5.0),
+                              padding:
+                                  const EdgeInsets.only(top: 10, left: 5.0),
                               child: Text(
                                 'Syarifudin',
                                 style: TextStyle(
@@ -96,12 +99,14 @@ class _chatState extends State<chat> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 0),
-                              child: Icon(Icons.call),),
+                              child: Icon(Icons.call),
+                            ),
                           ],
                         ),
                         Row(
                           children: [
-                            Padding(padding: const EdgeInsets.only(left: 5.0),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
                               child: Text(
                                 'Nomor                        : ',
                                 style: TextStyle(
@@ -113,18 +118,21 @@ class _chatState extends State<chat> {
                             ),
                             Container(
                               child: Text(
-                                '08213123131', style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                '08213123131',
+                                style: TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             )
                           ],
                         ),
                         Row(
                           children: [
-                            Padding(padding: const EdgeInsets.only(bottom: 10, left: 5.0),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 10, left: 5.0),
                               child: Text(
                                 'Kamar                         : ',
                                 style: TextStyle(
@@ -136,11 +144,12 @@ class _chatState extends State<chat> {
                             ),
                             Container(
                               child: Text(
-                                '2', style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                '2',
+                                style: TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             )
                           ],
@@ -155,12 +164,11 @@ class _chatState extends State<chat> {
         ),
       ),
     );
-
   }
-  void _wasyarif() async{
+
+  void _wasyarif() async {
     String nomorhp = '083111778069';
     var url = 'https://wa.me/+6283111778069';
     await launch(url);
   }
 }
-
