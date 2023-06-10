@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:projectmppl/login/Login.dart';
+import 'package:projectmppl/login/daftarakun.dart';
 
 import 'package:projectmppl/profile/ubahprofile.dart';
 import '../home.dart';
@@ -10,9 +12,7 @@ class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
 }
-
 class _ProfileState extends State<Profile> {
-  GoogleSignIn _googleSignIn = GoogleSignIn();
   User? _currentUser;
 
   @override
@@ -33,8 +33,9 @@ class _ProfileState extends State<Profile> {
       if (_currentUser!.photoURL != null && _currentUser!.photoURL != "") {
         return _currentUser!.photoURL!;
       }
+      return "https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg";
     }
-    return "https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg";
+    return "null";
   }
 
   String getDisplayName() {
@@ -55,10 +56,23 @@ class _ProfileState extends State<Profile> {
     return "unset";
   }
 
+  Future<void> _logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => Login()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFFFF4500), Color(0xFFFFA500)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -75,7 +89,8 @@ class _ProfileState extends State<Profile> {
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => home()));
+                MaterialPageRoute(builder: (context) => home()),
+              );
             },
           ),
           actions: [
@@ -83,7 +98,8 @@ class _ProfileState extends State<Profile> {
               textColor: Colors.black,
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => UbahProfile()));
+                  MaterialPageRoute(builder: (context) => UbahProfile()),
+                );
               },
               child: Text(
                 "Ubah Profile",
@@ -103,11 +119,15 @@ class _ProfileState extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Center(
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(75),
                     child: Container(
+                      width: 150,
+                      height: 150,
                       child: CachedNetworkImage(
                         imageUrl: getProfileImage(),
+                        fit: BoxFit.cover,
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
@@ -160,6 +180,31 @@ class _ProfileState extends State<Profile> {
                   width: 1000,
                   height: 5,
                   color: Colors.purple[200],
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrange), // Change to desired color
+                      ),
+                      onPressed: _logout,
+                      child: Text('Logout'),
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent), // Change to desired color
+                      ),
+                      onPressed: () {
+                        _logout;
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => daftarakun()),
+                        );
+                      },
+                      child: Text('Daftar'),
+                    ),
+                  ],
                 ),
               ],
             ),

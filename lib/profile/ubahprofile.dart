@@ -1,6 +1,17 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:projectmppl/login/Login.dart';
 import 'package:projectmppl/profile/profile.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_auth/firebase_auth.dart';
+
+enum FormType {
+  ChangeProfileImage,
+  ChangeUsername,
+  ChangePassword,
+}
 
 class UbahProfile extends StatefulWidget {
   @override
@@ -11,6 +22,9 @@ class _UbahProfileState extends State<UbahProfile> {
   GoogleSignIn _googleSignIn = GoogleSignIn();
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordlamaController = TextEditingController();
+  FormType _selectedForm = FormType.ChangeProfileImage;
+  File? _imageFile;
 
   @override
   void dispose() {
@@ -33,28 +47,219 @@ class _UbahProfileState extends State<UbahProfile> {
     }
   }
 
-  void _updateProfile() {
-    // Perform the necessary logic to update the user's profile information
-    // Here, you can use the _googleSignIn object to update the profile
+  Future<void> _uploadImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
 
-    // Get the updated username and password values
-    String username = _usernameController.text;
-    String password = _passwordController.text;
+  Future<String?> _uploadImageToFirebase() async {
+    if (_imageFile == null) {
+      return null;
+    }
 
-    // Perform the update operation
-    // ...
+    // Generate a unique filename for the image
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
 
-    // Redirect back to the profile screen after the update
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => Profile()),
-    );
+    // Get the reference to the Firebase Storage bucket
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance.ref().child('profil/$fileName');
+
+    // Upload the image file to Firebase Storage
+    await ref.putFile(_imageFile!);
+
+    // Get the download URL of the uploaded image
+    String? imageUrl = await ref.getDownloadURL();
+
+    return imageUrl;
+  }
+
+  Widget _buildForm(FormType formType) {
+    switch (formType) {
+      case FormType.ChangeProfileImage:
+        return Column(
+          children: [
+            Text('Change Profile Image Form'),
+            ElevatedButton(
+              onPressed: _uploadImage,
+              child: Text('Upload Image'),
+            ),
+            if (_imageFile != null) Image.file(_imageFile!),
+            ElevatedButton(
+              onPressed: () async {
+                // Upload the image to Firebase Storage
+                String? imageUrl = await _uploadImageToFirebase();
+                User? user = FirebaseAuth.instance.currentUser;
+
+                if (imageUrl != null) {
+                  if (user != null) {
+                    // Update the photoURL property
+                    try {
+                      await user.updatePhotoURL(imageUrl);
+                      // PhotoURL updated successfully
+                      print('PhotoURL updated successfully');
+                    } catch (e) {
+                      // Failed to update photoURL
+                      print('Failed to update PhotoURL: $e');
+                    }
+                  } else {
+                    // User not signed in
+                    print('User not signed in');
+                  }
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Profile()),
+                  );
+                } else {
+                  // Handle the case when image upload fails
+                }
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        );
+      case FormType.ChangeUsername:
+        return Column(
+          children: [
+            Text('Change Username Form'),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  hintText: 'Username',
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                String newUsername = _usernameController.text;
+                User? user = FirebaseAuth.instance.currentUser;
+
+                if (user != null) {
+                  try {
+                    await user.updateDisplayName(newUsername);
+                    print('Username updated successfully');
+                  } catch (e) {
+                    print('Failed to update username: $e');
+                  }
+                } else {
+                  // User not signed in
+                  print('User not signed in');
+                }
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => Profile()),
+                );
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        );
+      case FormType.ChangePassword:
+        return Column(
+          children: [
+            Text('Change Password Form'),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: TextField(
+                controller: _passwordlamaController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  hintText: 'Password lama',
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  hintText: 'Password baru',
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                String newPassword = _passwordController.text;
+                User? user = FirebaseAuth.instance.currentUser;
+
+                if (user != null) {
+                  try {
+                    AuthCredential credential = EmailAuthProvider.credential(
+                      email: user.email!,
+                      password: _passwordlamaController.text,
+                    );
+
+                    await user.reauthenticateWithCredential(credential);
+                    await user.updatePassword(newPassword);
+
+                    // Logout pengguna setelah berhasil mengubah password
+                    await FirebaseAuth.instance.signOut();
+
+                    // Password berhasil diperbarui dan pengguna telah logout
+                    print('Password berhasil diperbarui. Pengguna telah logout');
+
+                    // Navigasi ke halaman login
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  } catch (e) {
+                    // Gagal memperbarui password
+                    print('Gagal memperbarui password: $e');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Gagal mengubah password.'),
+                      ),
+                    );
+
+                    // Navigasi kembali ke halaman profil
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Profile()),
+                    );
+                  }
+                } else {
+                  // Pengguna belum masuk
+                  print('Pengguna belum masuk');
+                }
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        );
+      default:
+        return SizedBox.shrink();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.orangeAccent, Colors.orange],
+        ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -81,10 +286,27 @@ class _UbahProfileState extends State<UbahProfile> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Center(
-                    child: Container(child: Image.asset('assets/plus.png')),
-                  ),
+                DropdownButton<FormType>(
+                  value: _selectedForm,
+                  items: [
+                    DropdownMenuItem<FormType>(
+                      child: Text('Change Profile Image'),
+                      value: FormType.ChangeProfileImage,
+                    ),
+                    DropdownMenuItem<FormType>(
+                      child: Text('Change Username'),
+                      value: FormType.ChangeUsername,
+                    ),
+                    DropdownMenuItem<FormType>(
+                      child: Text('Change Password'),
+                      value: FormType.ChangePassword,
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedForm = value!;
+                    });
+                  },
                 ),
                 SizedBox(height: 20),
                 Padding(
@@ -98,61 +320,7 @@ class _UbahProfileState extends State<UbahProfile> {
                     ),
                   ),
                 ),
-                Container(
-                  child: TextField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      hintText: 'Username',
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  child: TextField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      hintText: 'Password',
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(80)),
-                    ),
-                    height: 90,
-                    width: 90,
-                    child: ElevatedButton(
-                      child: RotatedBox(
-                        quarterTurns: 3,
-                        child: Icon(
-                          Icons.arrow_downward,
-                          color: Colors.black,
-                          size: 60.0,
-                        ),
-                      ),
-                      onPressed: _updateProfile,
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                _buildForm(_selectedForm),
               ],
             ),
           ),

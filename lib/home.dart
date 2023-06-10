@@ -23,7 +23,7 @@ class _homeState extends State<home> {
     switch (index) {
       case 0:
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => kontak()),
+          MaterialPageRoute(builder: (context) => Kontak()),
         );
         break;
       case 1:
@@ -148,7 +148,7 @@ class _homeState extends State<home> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
-                                      fontSize: 25,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ],

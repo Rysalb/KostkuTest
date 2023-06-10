@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectmppl/home.dart';
 import 'package:projectmppl/penyewa/homepenyewa.dart';
-import 'daftarakun.dart';
 import 'lupapass.dart';
 
 class Login extends StatefulWidget {
@@ -139,21 +138,6 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MaterialButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => daftarakun()));
-                          },
-                          child: Text(
-                            'Daftar Akun',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black45,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
                         MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(

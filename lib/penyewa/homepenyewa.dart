@@ -200,7 +200,7 @@ class _homepenyewaState extends State<homepenyewa> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
-                                      fontSize: 25,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ],
