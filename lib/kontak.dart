@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'home.dart';
 
 class Kontak extends StatelessWidget {
@@ -54,25 +54,31 @@ class Kontak extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  color: Colors.orange[100], // Warna card
-                  child: ListTile(
-                    contentPadding: EdgeInsets.all(10),
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(penyewa['img']),
-                    ),
-                    title: Text(
-                      penyewa['nama'] as String,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange.shade600,
+                  color: Colors.orange[100],
+                  child: GestureDetector(
+                    onTap: () async {
+                      final url = 'https://wa.me/+62' + penyewa['nomor_hp'].toString();
+                      await launch(url);
+                    },
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(10),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(penyewa['img']),
                       ),
-                    ),
-                    subtitle: Text(
-                      "0"+penyewa['nomor_hp'].toString(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.orange.shade600,
+                      title: Text(
+                        penyewa['nama'] as String,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange.shade600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "0" + penyewa['nomor_hp'].toString(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.orange.shade600,
+                        ),
                       ),
                     ),
                   ),
