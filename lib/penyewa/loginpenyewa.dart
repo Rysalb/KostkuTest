@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectmppl/home.dart';
 import '../login/Login.dart';
-import '../login/daftarakun.dart';
+import '../login/Daftarakun.dart';
 import '../login/lupapass.dart';
 import 'homepenyewa.dart';
 
@@ -143,7 +143,8 @@ class _loginpenyewaState extends State<loginpenyewa> {
                         MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => daftarakun()));
+                                MaterialPageRoute(
+                                    builder: (context) => Daftarakun()));
                           },
                           child: Text(
                             'Daftar Akun',
@@ -157,7 +158,8 @@ class _loginpenyewaState extends State<loginpenyewa> {
                         MaterialButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => lupapass()));
+                                MaterialPageRoute(
+                                    builder: (context) => lupapass()));
                           },
                           child: Text(
                             'Lupa Password',
@@ -180,10 +182,11 @@ class _loginpenyewaState extends State<loginpenyewa> {
                         onPressed: () {
                           auth
                               .signInWithEmailAndPassword(
-                              email: _email, password: _pass)
+                                  email: _email, password: _pass)
                               .then((_) {
                             Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) => homepenyewa()));
+                                MaterialPageRoute(
+                                    builder: (context) => homepenyewa()));
                           });
                         },
                         child: RotatedBox(

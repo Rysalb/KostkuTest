@@ -9,6 +9,8 @@ import 'package:projectmppl/profile/ubahprofile.dart';
 import '../home.dart';
 
 class Profile extends StatefulWidget {
+  const Profile({super.key});
+
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -201,12 +203,11 @@ class _ProfileState extends State<Profile> {
                             Colors.deepOrangeAccent), // Change to desired color
                       ),
                       onPressed: () {
-                        _logout;
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => daftarakun()),
-                        );
+                        // _logout;
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const Daftarakun()));
                       },
-                      child: Text('Daftar Akun baru'),
+                      child: const Text('Daftar Akun baru'),
                     ),
                   ],
                 ),
