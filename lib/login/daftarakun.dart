@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../home.dart';
 import 'Login.dart';
 
 class daftarakun extends StatefulWidget {
@@ -90,16 +91,44 @@ class _daftarakunState extends State<daftarakun> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Column(
-                        children: [],
+                      SizedBox(width: 20),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(80)),
+                        ),
+                        height: MediaQuery.of(context).size.width * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        child: ElevatedButton(
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: Icon(
+                              Icons.arrow_downward,
+                              color: Colors.black,
+                              size: MediaQuery.of(context).size.width * 0.1,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => home(),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                      SizedBox(width: 80),
                       Padding(
-                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * (1/2.5)),
+                        padding: EdgeInsets.only(
+                            left:
+                                MediaQuery.of(context).size.width * (1 / 3.1)),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(80)),
+                            borderRadius: BorderRadius.all(Radius.circular(80)),
                           ),
                           height: MediaQuery.of(context).size.width * 0.25,
                           width: MediaQuery.of(context).size.width * 0.25,
@@ -121,7 +150,7 @@ class _daftarakunState extends State<daftarakun> {
                             onPressed: () {
                               auth
                                   .createUserWithEmailAndPassword(
-                                  email: _email, password: _pass)
+                                      email: _email, password: _pass)
                                   .then((_) {});
                               Navigator.of(context).push(
                                 MaterialPageRoute(

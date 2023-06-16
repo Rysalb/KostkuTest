@@ -36,7 +36,7 @@ class _pembayaranState extends State<pembayaran> {
             },
           ),
           title: Text(
-            'Pembayaran',
+            'Metode Pembayaran',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -57,11 +57,8 @@ class _pembayaranState extends State<pembayaran> {
                     Flexible(
                       flex: 1,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          "https://cdn.pixabay.com/photo/2017/11/02/14/26/model-2911329_960_720.jpg",
-                        ),
-                      ),
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.asset('assets/bca.png')),
                     ),
                     Flexible(
                       flex: 6,
@@ -79,13 +76,13 @@ class _pembayaranState extends State<pembayaran> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Rysa Laksana",
+                                  "Santi Dwi Yuni Mayanti",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "BRI :",
+                                  "BCA :",
                                   style: TextStyle(
                                     color: Colors.grey[700],
                                   ),
@@ -102,199 +99,7 @@ class _pembayaranState extends State<pembayaran> {
                                   ),
                                 ),
                                 Text(
-                                  "7318072318371",
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          "https://cdn.pixabay.com/photo/2017/11/02/14/26/model-2911329_960_720.jpg",
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 6,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.yellow[100],
-                            border: Border.all(
-                              color: Colors.orangeAccent,
-                              width: 5,
-                            )),
-                        padding: EdgeInsets.all(13.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Rysa Laksana",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "BRI :",
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "7318072318371",
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          "https://cdn.pixabay.com/photo/2017/11/02/14/26/model-2911329_960_720.jpg",
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 6,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.yellow[100],
-                            border: Border.all(
-                              color: Colors.orangeAccent,
-                              width: 5,
-                            )),
-                        padding: EdgeInsets.all(13.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Rysa Laksana",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "BRI :",
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "7318072318371",
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          "https://cdn.pixabay.com/photo/2017/11/02/14/26/model-2911329_960_720.jpg",
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 6,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.yellow[100],
-                            border: Border.all(
-                              color: Colors.orangeAccent,
-                              width: 5,
-                            )),
-                        padding: EdgeInsets.all(13.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Rysa Laksana",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "BRI :",
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "7318072318371",
+                                  "63180723183",
                                   style: TextStyle(
                                     color: Colors.grey[700],
                                   ),
@@ -308,10 +113,204 @@ class _pembayaranState extends State<pembayaran> {
                   ],
                 ),
                 SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          "assets/mandiri.png",
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 6,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.yellow[100],
+                            border: Border.all(
+                              color: Colors.orangeAccent,
+                              width: 5,
+                            )),
+                        padding: EdgeInsets.all(13.0),
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Santi Dwi Yuni Mayanti",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Mandiri :",
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "8318072318",
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          "assets/gopay.png",
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 6,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.yellow[100],
+                            border: Border.all(
+                              color: Colors.orangeAccent,
+                              width: 5,
+                            )),
+                        padding: EdgeInsets.all(13.0),
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Santi Dwi Yuni Mayanti",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Gopay :",
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "0831252474860",
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     Flexible(
+                //       flex: 1,
+                //       child: ClipRRect(
+                //         borderRadius: BorderRadius.circular(15),
+                //         child: Image.network(
+                //           "https://cdn.pixabay.com/photo/2017/11/02/14/26/model-2911329_960_720.jpg",
+                //         ),
+                //       ),
+                //     ),
+                //     Flexible(
+                //       flex: 6,
+                //       child: Container(
+                //         decoration: BoxDecoration(
+                //             color: Colors.yellow[100],
+                //             border: Border.all(
+                //               color: Colors.orangeAccent,
+                //               width: 5,
+                //             )),
+                //         padding: EdgeInsets.all(13.0),
+                //         child: Row(
+                //           children: [
+                //             Column(
+                //               crossAxisAlignment: CrossAxisAlignment.start,
+                //               children: <Widget>[
+                //                 Text(
+                //                   "Rysa Laksana",
+                //                   style: TextStyle(
+                //                     fontWeight: FontWeight.bold,
+                //                   ),
+                //                 ),
+                //                 Text(
+                //                   "BRI :",
+                //                   style: TextStyle(
+                //                     color: Colors.grey[700],
+                //                   ),
+                //                 )
+                //               ],
+                //             ),
+                //             Column(
+                //               crossAxisAlignment: CrossAxisAlignment.start,
+                //               children: <Widget>[
+                //                 Text(
+                //                   "",
+                //                   style: TextStyle(
+                //                     fontWeight: FontWeight.bold,
+                //                   ),
+                //                 ),
+                //                 Text(
+                //                   "7318072318371",
+                //                   style: TextStyle(
+                //                     color: Colors.grey[700],
+                //                   ),
+                //                 )
+                //               ],
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                SizedBox(height: 10),
               ],
             ),
           ),
-
         ),
       ),
     );

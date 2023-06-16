@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:projectmppl/login/Login.dart';
 import '../firebase/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../passbaru.dart';
@@ -10,16 +11,16 @@ class lupapass extends StatefulWidget {
 }
 
 class _lupapassState extends State<lupapass> {
-final _emailController = TextEditingController();
+  final _emailController = TextEditingController();
 
   @override
-  void dispose(){
+  void dispose() {
     _emailController.dispose();
-  super.dispose();
+    super.dispose();
   }
 
-Future passwordReset() async{
-    try{
+  Future passwordReset() async {
+    try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailController.text.trim());
       showDialog(
@@ -93,21 +94,53 @@ Future passwordReset() async{
                     controller: _emailController,
                   ),
                 ),
-
                 SizedBox(height: 10),
                 Row(
                   children: [
-                    Column(
-                      children: [
-                      ],
+                    SizedBox(
+                      width: 20,
                     ),
-                    SizedBox(width: 80,),
                     Padding(
-                      padding: const EdgeInsets.only(left: 180.0),
+                      padding: const EdgeInsets.only(right: 0),
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(80))
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(80))),
+                        height: 90,
+                        width: 90,
+                        child: ElevatedButton(
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: Icon(
+                              Icons.arrow_downward,
+                              color: Colors.black,
+                              size: 60.0,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(20), // <-- Radius
+                            ),
+                          ),
                         ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 75),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(80))),
                         height: 90,
                         width: 90,
                         child: ElevatedButton(
@@ -123,12 +156,13 @@ Future passwordReset() async{
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // <-- Radius
+                              borderRadius:
+                                  BorderRadius.circular(20), // <-- Radius
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],

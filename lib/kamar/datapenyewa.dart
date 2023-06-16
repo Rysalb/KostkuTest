@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
-
 class DataPenyewa extends StatefulWidget {
   @override
   State<DataPenyewa> createState() => _DataPenyewaState();
@@ -164,7 +163,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Nama : ',
                                           style: TextStyle(
@@ -189,7 +189,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Tanggal Masuk: ',
                                           style: TextStyle(
@@ -202,7 +203,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                       Container(
                                         child: Text(
                                           DateFormat('dd MMM yyyy').format(
-                                              penyewaDoc['tanggal_masuk'].toDate()),
+                                              penyewaDoc['tanggal_masuk']
+                                                  .toDate()),
                                           style: TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,
@@ -215,7 +217,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Nomor HP: ',
                                           style: TextStyle(
@@ -240,7 +243,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Status : ',
                                           style: TextStyle(
@@ -279,13 +283,15 @@ class _DataPenyewaState extends State<DataPenyewa> {
                               ],
                             ),
                           ),
-                          if (penyewaDoc != null)...[
+                          if (penyewaDoc != null) ...[
                             Column(
                               children: <Widget>[
                                 GestureDetector(
                                   child: Container(
-                                    height: MediaQuery.of(context).size.height * 0.35,
-                                    width: MediaQuery.of(context).size.width * 0.1,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.35,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.1,
                                     color: Colors.blue,
                                     child: Center(
                                       child: Text(
@@ -306,37 +312,50 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                             return Dialog(
                                               child: SingleChildScrollView(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(20.0),
+                                                  padding: const EdgeInsets.all(
+                                                      20.0),
                                                   child: Column(
-                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
                                                     children: [
                                                       Text(
                                                         'Rubah Data Penyewa',
                                                         style: TextStyle(
                                                           fontSize: 20,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
                                                       SizedBox(height: 20),
                                                       TextField(
-                                                        controller: namaController,
-                                                        decoration: InputDecoration(
+                                                        controller:
+                                                            namaController,
+                                                        decoration:
+                                                            InputDecoration(
                                                           labelText: 'Nama',
                                                         ),
                                                       ),
                                                       TextField(
-                                                        controller: nominalController,
-                                                        decoration: InputDecoration(
+                                                        controller:
+                                                            nominalController,
+                                                        decoration:
+                                                            InputDecoration(
                                                           labelText: 'Nominal',
                                                         ),
-                                                        keyboardType: TextInputType.number,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
                                                       ),
                                                       TextField(
-                                                        controller: nomorHPController,
-                                                        decoration: InputDecoration(
+                                                        controller:
+                                                            nomorHPController,
+                                                        decoration:
+                                                            InputDecoration(
                                                           labelText: 'Nomor HP',
                                                         ),
-                                                        keyboardType: TextInputType.number,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
                                                       ),
                                                       CheckboxListTile(
                                                         title: Text('Status'),
@@ -353,20 +372,29 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         onPressed: () {
                                                           showDatePicker(
                                                             context: context,
-                                                            initialDate: tanggalMasuk ?? DateTime.now(),
-                                                            firstDate: DateTime(2000),
-                                                            lastDate: DateTime(2100),
+                                                            initialDate:
+                                                                tanggalMasuk ??
+                                                                    DateTime
+                                                                        .now(),
+                                                            firstDate:
+                                                                DateTime(2000),
+                                                            lastDate:
+                                                                DateTime(2100),
                                                           ).then((date) {
                                                             if (date != null) {
                                                               setState(() {
-                                                                tanggalMasuk = date;
+                                                                tanggalMasuk =
+                                                                    date;
                                                               });
                                                             }
                                                           });
                                                         },
                                                         child: Text(
                                                           tanggalMasuk != null
-                                                              ? DateFormat('dd-MM-yyyy').format(tanggalMasuk!)
+                                                              ? DateFormat(
+                                                                      'dd-MM-yyyy')
+                                                                  .format(
+                                                                      tanggalMasuk!)
                                                               : 'Pilih Tanggal Masuk',
                                                         ),
                                                       ),
@@ -376,20 +404,29 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         onPressed: () {
                                                           showDatePicker(
                                                             context: context,
-                                                            initialDate: tanggalKeluar ?? DateTime.now(),
-                                                            firstDate: DateTime(2000),
-                                                            lastDate: DateTime(2100),
+                                                            initialDate:
+                                                                tanggalKeluar ??
+                                                                    DateTime
+                                                                        .now(),
+                                                            firstDate:
+                                                                DateTime(2000),
+                                                            lastDate:
+                                                                DateTime(2100),
                                                           ).then((date) {
                                                             if (date != null) {
                                                               setState(() {
-                                                                tanggalKeluar = date;
+                                                                tanggalKeluar =
+                                                                    date;
                                                               });
                                                             }
                                                           });
                                                         },
                                                         child: Text(
                                                           tanggalKeluar != null
-                                                              ? DateFormat('dd-MM-yyyy').format(tanggalKeluar!)
+                                                              ? DateFormat(
+                                                                      'dd-MM-yyyy')
+                                                                  .format(
+                                                                      tanggalKeluar!)
                                                               : 'Pilih Tanggal Keluar',
                                                         ),
                                                       ),
@@ -397,8 +434,12 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           imgURL = "";
-                                                          tambahDataPenyewa(kamarDoc['id']);
-                                                          Navigator.of(context).pop();
+                                                          ubahDataPenyewa(
+                                                              kamarDoc['id'],
+                                                              namaController
+                                                                  .text);
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         },
                                                         child: Text('Simpan'),
                                                       ),
@@ -406,13 +447,16 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           getImage().then((_) {
-                                                            setState(() {}); // Memperbarui tampilan dialog setelah mengunggah gambar
+                                                            setState(
+                                                                () {}); // Memperbarui tampilan dialog setelah mengunggah gambar
                                                           });
                                                         },
-                                                        child: Text('Upload Gambar'),
+                                                        child: Text(
+                                                            'Upload Gambar'),
                                                       ),
                                                       SizedBox(height: 20),
-                                                      if (selectedImage != null) ...[
+                                                      if (selectedImage !=
+                                                          null) ...[
                                                         Image.file(
                                                           selectedImage!,
                                                           height: 200,
@@ -430,14 +474,17 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   },
                                 ),
                               ],
-                            ),],
-                          if (penyewaDoc == null)...[
+                            ),
+                          ],
+                          if (penyewaDoc == null) ...[
                             Column(
                               children: <Widget>[
                                 GestureDetector(
                                   child: Container(
-                                    height: MediaQuery.of(context).size.height * 0.05,
-                                    width: MediaQuery.of(context).size.width * 0.15,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
                                     color: Colors.blue,
                                     child: Center(
                                       child: Text(
@@ -458,37 +505,50 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                             return Dialog(
                                               child: SingleChildScrollView(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(20.0),
+                                                  padding: const EdgeInsets.all(
+                                                      20.0),
                                                   child: Column(
-                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
                                                     children: [
                                                       Text(
                                                         'Tambah Data Penyewa',
                                                         style: TextStyle(
                                                           fontSize: 20,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
                                                       SizedBox(height: 20),
                                                       TextField(
-                                                        controller: namaController,
-                                                        decoration: InputDecoration(
+                                                        controller:
+                                                            namaController,
+                                                        decoration:
+                                                            InputDecoration(
                                                           labelText: 'Nama',
                                                         ),
                                                       ),
                                                       TextField(
-                                                        controller: nominalController,
-                                                        decoration: InputDecoration(
+                                                        controller:
+                                                            nominalController,
+                                                        decoration:
+                                                            InputDecoration(
                                                           labelText: 'Nominal',
                                                         ),
-                                                        keyboardType: TextInputType.number,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
                                                       ),
                                                       TextField(
-                                                        controller: nomorHPController,
-                                                        decoration: InputDecoration(
+                                                        controller:
+                                                            nomorHPController,
+                                                        decoration:
+                                                            InputDecoration(
                                                           labelText: 'Nomor HP',
                                                         ),
-                                                        keyboardType: TextInputType.number,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
                                                       ),
                                                       CheckboxListTile(
                                                         title: Text('Status'),
@@ -505,20 +565,29 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         onPressed: () {
                                                           showDatePicker(
                                                             context: context,
-                                                            initialDate: tanggalMasuk ?? DateTime.now(),
-                                                            firstDate: DateTime(2000),
-                                                            lastDate: DateTime(2100),
+                                                            initialDate:
+                                                                tanggalMasuk ??
+                                                                    DateTime
+                                                                        .now(),
+                                                            firstDate:
+                                                                DateTime(2000),
+                                                            lastDate:
+                                                                DateTime(2100),
                                                           ).then((date) {
                                                             if (date != null) {
                                                               setState(() {
-                                                                tanggalMasuk = date;
+                                                                tanggalMasuk =
+                                                                    date;
                                                               });
                                                             }
                                                           });
                                                         },
                                                         child: Text(
                                                           tanggalMasuk != null
-                                                              ? DateFormat('dd-MM-yyyy').format(tanggalMasuk!)
+                                                              ? DateFormat(
+                                                                      'dd-MM-yyyy')
+                                                                  .format(
+                                                                      tanggalMasuk!)
                                                               : 'Pilih Tanggal Masuk',
                                                         ),
                                                       ),
@@ -528,20 +597,29 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         onPressed: () {
                                                           showDatePicker(
                                                             context: context,
-                                                            initialDate: tanggalKeluar ?? DateTime.now(),
-                                                            firstDate: DateTime(2000),
-                                                            lastDate: DateTime(2100),
+                                                            initialDate:
+                                                                tanggalKeluar ??
+                                                                    DateTime
+                                                                        .now(),
+                                                            firstDate:
+                                                                DateTime(2000),
+                                                            lastDate:
+                                                                DateTime(2100),
                                                           ).then((date) {
                                                             if (date != null) {
                                                               setState(() {
-                                                                tanggalKeluar = date;
+                                                                tanggalKeluar =
+                                                                    date;
                                                               });
                                                             }
                                                           });
                                                         },
                                                         child: Text(
                                                           tanggalKeluar != null
-                                                              ? DateFormat('dd-MM-yyyy').format(tanggalKeluar!)
+                                                              ? DateFormat(
+                                                                      'dd-MM-yyyy')
+                                                                  .format(
+                                                                      tanggalKeluar!)
                                                               : 'Pilih Tanggal Keluar',
                                                         ),
                                                       ),
@@ -549,8 +627,10 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           imgURL = "";
-                                                          tambahDataPenyewa(kamarDoc['id']);
-                                                          Navigator.of(context).pop();
+                                                          tambahDataPenyewa(
+                                                              kamarDoc['id']);
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         },
                                                         child: Text('Simpan'),
                                                       ),
@@ -558,13 +638,16 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           getImage().then((_) {
-                                                            setState(() {}); // Memperbarui tampilan dialog setelah mengunggah gambar
+                                                            setState(
+                                                                () {}); // Memperbarui tampilan dialog setelah mengunggah gambar
                                                           });
                                                         },
-                                                        child: Text('Upload Gambar'),
+                                                        child: Text(
+                                                            'Upload Gambar'),
                                                       ),
                                                       SizedBox(height: 20),
-                                                      if (selectedImage != null) ...[
+                                                      if (selectedImage !=
+                                                          null) ...[
                                                         Image.file(
                                                           selectedImage!,
                                                           height: 200,
@@ -580,12 +663,11 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                       },
                                     );
                                   },
-
                                 ),
                               ],
-                            ),],
+                            ),
+                          ],
                         ],
-
                       ),
                     ),
                   );
@@ -617,8 +699,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
       // Dapatkan URL gambar yang diunggah
       String imageUrl = await storageReference.getDownloadURL();
       QuerySnapshot snapshot =
-      await FirebaseFirestore.instance.collection('penyewa').get();
-      int totalData = snapshot.size;
+          await FirebaseFirestore.instance.collection('penyewa').get();
+      int totalData = snapshot.size + 1;
 
       Map<String, dynamic> data = {
         'id': totalData,
@@ -646,9 +728,64 @@ class _DataPenyewaState extends State<DataPenyewa> {
     }
   }
 
+  void ubahDataPenyewa(int idKamar, String nama) async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('penyewa')
+          .where('id_kamar', isEqualTo: idKamar)
+          .get();
+
+      List<QueryDocumentSnapshot> documents = snapshot.docs;
+      if (documents.isNotEmpty) {
+        String docId = documents[0].id;
+
+        int nominal = int.parse(nominalController.text);
+        int nomorHP = int.parse(nomorHPController.text);
+
+        String imageName = path.basename(selectedImage!.path);
+        firebase_storage.Reference storageReference = firebase_storage
+            .FirebaseStorage.instance
+            .ref()
+            .child('KTP')
+            .child(imageName);
+
+        // Upload gambar ke Firebase Storage
+        await storageReference.putFile(selectedImage!);
+
+        // Dapatkan URL gambar yang diunggah
+        String imageUrl = await storageReference.getDownloadURL();
+
+        Map<String, dynamic> data = {
+          'nama': nama,
+          'nominal': nominal,
+          'nomor_hp': nomorHP,
+          'status': status,
+          'tanggal_keluar': tanggalKeluar,
+          'tanggal_masuk': tanggalMasuk,
+          'img': imageUrl,
+        };
+
+        await FirebaseFirestore.instance
+            .collection('penyewa')
+            .doc(docId)
+            .update(data);
+
+        setState(() {
+          namaController.clear();
+          nominalController.clear();
+          nomorHPController.clear();
+          status = false;
+          imgURL = "";
+        });
+      }
+    } catch (e) {
+      print('Error updating tenant data: $e');
+    }
+  }
+
   Future<void> getImage() async {
     final pickedImage =
-    await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().getImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         selectedImage = File(pickedImage.path);
