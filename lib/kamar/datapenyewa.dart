@@ -227,7 +227,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                       ),
                                       Container(
                                         child: Text(
-                                          '${penyewaDoc['nomor_hp']}',
+                                          '0${penyewaDoc['nomor_hp']}',
                                           style: TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,

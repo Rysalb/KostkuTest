@@ -80,7 +80,7 @@ class DetailPenyewa extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Nomor HP: ${penyewaData?['nomor_hp'] ?? ''}',
+                          'Nomor HP: 0${penyewaData?['nomor_hp'] ?? ''}',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -89,7 +89,7 @@ class DetailPenyewa extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Tanggal Bayar: ${DateFormat('dd MMM yyyy').format((penyewaData?['tanggal_bayar'] as Timestamp?)?.toDate() ?? DateTime.now())}',
+                          'Tanggal Keluar: ${DateFormat('dd MMM yyyy').format((penyewaData?['tanggal_bayar'] as Timestamp?)?.toDate() ?? DateTime.now())}',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,

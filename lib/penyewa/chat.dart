@@ -41,7 +41,7 @@ class _chatState extends State<chat> {
               Padding(
                 padding: const EdgeInsets.only(left: 2.0),
                 child: Text(
-                  'Contact',
+                  'Kontak Pengelola Kost',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -87,9 +87,9 @@ class _chatState extends State<chat> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.only(top: 10, left: 5.0),
+                              const EdgeInsets.only(top: 10, left: 5.0),
                               child: Text(
-                                'Syarifudin',
+                                'Bu Santi',
                                 style: TextStyle(
                                   color: Colors.black45,
                                   fontSize: 25,
@@ -132,9 +132,60 @@ class _chatState extends State<chat> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.only(bottom: 10, left: 5.0),
+                              const EdgeInsets.only(bottom: 10, left: 5.0),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black,
+                      elevation: 0,
+                      side: const BorderSide(
+                        width: 5.0,
+                        color: Colors.green,
+                      )),
+                  onPressed: () {
+                    _wasyarif1();
+                  },
+                  child: Container(
+                    margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                    width: 1000,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                              const EdgeInsets.only(top: 10, left: 5.0),
                               child: Text(
-                                'Kamar                         : ',
+                                'Dahan',
+                                style: TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 0),
+                              child: Icon(Icons.call),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                'Nomor                        : ',
                                 style: TextStyle(
                                   color: Colors.black45,
                                   fontSize: 15,
@@ -144,13 +195,21 @@ class _chatState extends State<chat> {
                             ),
                             Container(
                               child: Text(
-                                '2',
+                                '08213123164',
                                 style: TextStyle(
                                   color: Colors.black45,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                              const EdgeInsets.only(bottom: 10, left: 5.0),
                             )
                           ],
                         )
@@ -169,6 +228,12 @@ class _chatState extends State<chat> {
   void _wasyarif() async {
     String nomorhp = '083111778069';
     var url = 'https://wa.me/+6283111778069';
+    await launch(url);
+  }
+
+  void _wasyarif1() async {
+    String nomorhp = '082336964704';
+    var url = 'https://wa.me/+6282336964704';
     await launch(url);
   }
 }
