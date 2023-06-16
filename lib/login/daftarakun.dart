@@ -43,7 +43,7 @@ class _daftarakunState extends State<daftarakun> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
-                      'Daftar Akun',
+                      'Daftar Akun Baru',
                       style: TextStyle(
                         color: Colors.black54,
                         fontSize: 35,
@@ -91,7 +91,7 @@ class _daftarakunState extends State<daftarakun> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      SizedBox(width: 20),
+                      SizedBox(width: 10),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(80)),

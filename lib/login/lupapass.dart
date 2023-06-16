@@ -71,10 +71,10 @@ class _lupapassState extends State<lupapass> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
-                    'Masukan Data',
+                    'Masukan Email anda untuk reset Password',
                     style: TextStyle(
                       color: Colors.black54,
-                      fontSize: 35,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

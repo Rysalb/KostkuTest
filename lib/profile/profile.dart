@@ -12,6 +12,7 @@ class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
 }
+
 class _ProfileState extends State<Profile> {
   User? _currentUser;
 
@@ -40,7 +41,8 @@ class _ProfileState extends State<Profile> {
 
   String getDisplayName() {
     if (_currentUser != null) {
-      if (_currentUser!.displayName != null && _currentUser!.displayName != "") {
+      if (_currentUser!.displayName != null &&
+          _currentUser!.displayName != "") {
         return _currentUser!.displayName!;
       }
     }
@@ -187,14 +189,16 @@ class _ProfileState extends State<Profile> {
                   children: [
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrange), // Change to desired color
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.deepOrange), // Change to desired color
                       ),
                       onPressed: _logout,
                       child: Text('Logout'),
                     ),
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent), // Change to desired color
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.deepOrangeAccent), // Change to desired color
                       ),
                       onPressed: () {
                         _logout;
@@ -202,7 +206,7 @@ class _ProfileState extends State<Profile> {
                           MaterialPageRoute(builder: (context) => daftarakun()),
                         );
                       },
-                      child: Text('Daftar'),
+                      child: Text('Daftar Akun baru'),
                     ),
                   ],
                 ),
