@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projectmppl/login/Login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class lupapass extends StatefulWidget {
-  const lupapass({super.key});
+  const lupapass({Key? key}) : super(key: key);
 
   @override
   State<lupapass> createState() => _lupapassState();
@@ -18,10 +17,10 @@ class _lupapassState extends State<lupapass> {
     super.dispose();
   }
 
-  Future passwordReset() async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
+  Future<void> passwordReset() async {
+    final String email = _emailController.text.trim();
+    
+    if (isValidEmail(email)) {
       showDialog(
         context: context,
         builder: (context) {
@@ -30,17 +29,21 @@ class _lupapassState extends State<lupapass> {
           );
         },
       );
-    } on FirebaseAuthException catch (e) {
-      print(e);
+    } else {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Text(e.message.toString()),
+            content: const Text('Email tidak valid'),
           );
         },
       );
     }
+  }
+
+  bool isValidEmail(String email) {
+    // Sederhana saja, cek apakah email memiliki "@" dan "."
+    return email.contains('@') && email.contains('.');
   }
 
   @override

@@ -7,6 +7,8 @@ import 'package:path/path.dart' as path;
 import 'package:projectmppl/penyewa/homepenyewa.dart';
 
 class lihatkamar extends StatefulWidget {
+  const lihatkamar({super.key});
+
   @override
   State<lihatkamar> createState() => _lihatkamarState();
 }
@@ -29,17 +31,17 @@ class _lihatkamarState extends State<lihatkamar> {
         backgroundColor: Colors.deepOrange,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             size: 30.0,
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => homepenyewa()),
+              MaterialPageRoute(builder: (context) => const homepenyewa()),
             );
           },
         ),
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -50,7 +52,7 @@ class _lihatkamarState extends State<lihatkamar> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 2.0),
+              padding: EdgeInsets.only(left: 2.0),
               child: Text(
                 'Data Penyewa',
                 style: TextStyle(
@@ -70,7 +72,7 @@ class _lihatkamarState extends State<lihatkamar> {
           }
 
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
 
           QuerySnapshot kamarDocs = snapshot.data!;
@@ -89,7 +91,7 @@ class _lihatkamarState extends State<lihatkamar> {
                   }
 
                   if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
 
                   QuerySnapshot penyewaDocs = snapshot.data!;
@@ -104,7 +106,7 @@ class _lihatkamarState extends State<lihatkamar> {
                     onTap: () {},
                     child: Container(
                       margin:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                       width: 1000,
                       decoration: BoxDecoration(
                         color: Colors.yellow[100],
@@ -121,7 +123,7 @@ class _lihatkamarState extends State<lihatkamar> {
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
                                     'Kamar No ${kamarDoc['id']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black45,
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -131,8 +133,8 @@ class _lihatkamarState extends State<lihatkamar> {
                                 if (penyewaDoc != null) ...[
                                   Row(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Nama : ',
                                           style: TextStyle(
@@ -145,7 +147,7 @@ class _lihatkamarState extends State<lihatkamar> {
                                       Container(
                                         child: Text(
                                           '${penyewaDoc['nama']}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -156,8 +158,8 @@ class _lihatkamarState extends State<lihatkamar> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5.0),
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Nomor HP: ',
                                           style: TextStyle(
@@ -170,7 +172,7 @@ class _lihatkamarState extends State<lihatkamar> {
                                       Container(
                                         child: Text(
                                           '0${penyewaDoc['nomor_hp']}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -185,7 +187,7 @@ class _lihatkamarState extends State<lihatkamar> {
                           ),
                           Expanded(
                             flex: 1,
-                            child: Container(
+                            child: SizedBox(
                               height: 100,
                               child: InkWell(
                                 onTap: () {
@@ -262,7 +264,7 @@ class _lihatkamarState extends State<lihatkamar> {
 
   Future<void> getImage() async {
     final pickedImage =
-    await ImagePicker().getImage(source: ImageSource.gallery);
+    await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         selectedImage = File(pickedImage.path);

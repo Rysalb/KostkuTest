@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projectmppl/home.dart';
 import '../login/Login.dart';
 import '../login/Daftarakun.dart';
 import '../login/lupapass.dart';
@@ -20,7 +19,7 @@ class _loginpenyewaState extends State<loginpenyewa> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -34,7 +33,7 @@ class _loginpenyewaState extends State<loginpenyewa> {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +46,7 @@ class _loginpenyewaState extends State<loginpenyewa> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 45, right: 30),
-                  child: Container(
+                  child: SizedBox(
                     height: 20,
                     width: double.infinity,
                     child: ElevatedButton(
@@ -55,7 +54,10 @@ class _loginpenyewaState extends State<loginpenyewa> {
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) => Login()));
                       },
-                      child: Stack(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey,
+                      ),
+                      child: const Stack(
                         children: [
                           Align(
                             alignment: Alignment.centerRight,
@@ -77,15 +79,12 @@ class _loginpenyewaState extends State<loginpenyewa> {
                           ),
                         ],
                       ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                const SizedBox(height: 30),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
                   child: Text(
                     'Sign In',
                     style: TextStyle(
@@ -95,9 +94,9 @@ class _loginpenyewaState extends State<loginpenyewa> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
@@ -132,7 +131,7 @@ class _loginpenyewaState extends State<loginpenyewa> {
                     },
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -144,9 +143,9 @@ class _loginpenyewaState extends State<loginpenyewa> {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => Daftarakun()));
+                                    builder: (context) => const Daftarakun()));
                           },
-                          child: Text(
+                          child: const Text(
                             'Daftar Akun',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -159,9 +158,9 @@ class _loginpenyewaState extends State<loginpenyewa> {
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => lupapass()));
+                                    builder: (context) => const lupapass()));
                           },
-                          child: Text(
+                          child: const Text(
                             'Lupa Password',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -186,21 +185,21 @@ class _loginpenyewaState extends State<loginpenyewa> {
                               .then((_) {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => homepenyewa()));
+                                    builder: (context) => const homepenyewa()));
                           });
                         },
-                        child: RotatedBox(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: const RotatedBox(
                           quarterTurns: 3,
                           child: Icon(
                             Icons.arrow_downward,
                             color: Colors.black,
                             size: 60.0,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),

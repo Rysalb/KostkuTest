@@ -9,6 +9,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
 class DataPenyewa extends StatefulWidget {
+  const DataPenyewa({super.key});
+
   @override
   State<DataPenyewa> createState() => _DataPenyewaState();
 }
@@ -31,17 +33,17 @@ class _DataPenyewaState extends State<DataPenyewa> {
         backgroundColor: Colors.deepOrange,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             size: 30.0,
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => home()),
+              MaterialPageRoute(builder: (context) => const home()),
             );
           },
         ),
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -52,7 +54,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 2.0),
+              padding: EdgeInsets.only(left: 2.0),
               child: Text(
                 'Data Penyewa',
                 style: TextStyle(
@@ -72,7 +74,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
           }
 
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
 
           QuerySnapshot kamarDocs = snapshot.data!;
@@ -91,7 +93,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                   }
 
                   if (!snapshot.hasData) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
 
                   QuerySnapshot penyewaDocs = snapshot.data!;
@@ -123,7 +125,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                       }
                     },
                     child: Container(
-                      margin: EdgeInsets.symmetric(
+                      margin: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 10.0),
                       width: 1000,
                       decoration: BoxDecoration(
@@ -140,7 +142,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Text(
                                     'Kamar No ${kamarDoc['id']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black45,
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -162,9 +164,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 5.0),
+                                            EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Nama : ',
                                           style: TextStyle(
@@ -177,7 +179,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                       Container(
                                         child: Text(
                                           '${penyewaDoc['nama']}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -188,9 +190,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 5.0),
+                                            EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Tanggal Masuk: ',
                                           style: TextStyle(
@@ -205,7 +207,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                           DateFormat('dd MMM yyyy').format(
                                               penyewaDoc['tanggal_masuk']
                                                   .toDate()),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -216,9 +218,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 5.0),
+                                            EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Nomor HP: ',
                                           style: TextStyle(
@@ -231,7 +233,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                       Container(
                                         child: Text(
                                           '0${penyewaDoc['nomor_hp']}',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black45,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -242,9 +244,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 5.0),
+                                            EdgeInsets.only(left: 5.0),
                                         child: Text(
                                           'Status : ',
                                           style: TextStyle(
@@ -263,14 +265,14 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                           borderRadius: BorderRadius.circular(
                                               5.0), // Memberikan border radius pada container
                                         ),
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             horizontal: 5.0, vertical: 2.0),
                                         // Memberikan padding pada container
                                         child: Text(
                                           penyewaDoc['status']
                                               ? 'Sudah Bayar'
                                               : 'Belum Bayar',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -293,7 +295,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                     width:
                                         MediaQuery.of(context).size.width * 0.1,
                                     color: Colors.blue,
-                                    child: Center(
+                                    child: const Center(
                                       child: Text(
                                         'Rubah',
                                         style: TextStyle(
@@ -318,7 +320,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                     mainAxisSize:
                                                         MainAxisSize.min,
                                                     children: [
-                                                      Text(
+                                                      const Text(
                                                         'Rubah Data Penyewa',
                                                         style: TextStyle(
                                                           fontSize: 20,
@@ -326,12 +328,12 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                               FontWeight.bold,
                                                         ),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       TextField(
                                                         controller:
                                                             namaController,
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           labelText: 'Nama',
                                                         ),
                                                       ),
@@ -339,7 +341,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         controller:
                                                             nominalController,
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           labelText: 'Nominal',
                                                         ),
                                                         keyboardType:
@@ -350,7 +352,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         controller:
                                                             nomorHPController,
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           labelText: 'Nomor HP',
                                                         ),
                                                         keyboardType:
@@ -358,7 +360,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                                 .number,
                                                       ),
                                                       CheckboxListTile(
-                                                        title: Text('Status'),
+                                                        title: const Text('Status'),
                                                         value: status,
                                                         onChanged: (value) {
                                                           setState(() {
@@ -366,8 +368,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                           });
                                                         },
                                                       ),
-                                                      SizedBox(height: 20),
-                                                      Text('Tanggal Masuk'),
+                                                      const SizedBox(height: 20),
+                                                      const Text('Tanggal Masuk'),
                                                       TextButton(
                                                         onPressed: () {
                                                           showDatePicker(
@@ -398,8 +400,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                               : 'Pilih Tanggal Masuk',
                                                         ),
                                                       ),
-                                                      SizedBox(height: 20),
-                                                      Text('Tanggal Keluar'),
+                                                      const SizedBox(height: 20),
+                                                      const Text('Tanggal Keluar'),
                                                       TextButton(
                                                         onPressed: () {
                                                           showDatePicker(
@@ -430,7 +432,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                               : 'Pilih Tanggal Keluar',
                                                         ),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           imgURL = "";
@@ -441,9 +443,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child: Text('Simpan'),
+                                                        child: const Text('Simpan'),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           getImage().then((_) {
@@ -451,10 +453,10 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                                 () {}); // Memperbarui tampilan dialog setelah mengunggah gambar
                                                           });
                                                         },
-                                                        child: Text(
+                                                        child: const Text(
                                                             'Upload Gambar'),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       if (selectedImage !=
                                                           null) ...[
                                                         Image.file(
@@ -486,7 +488,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                     width: MediaQuery.of(context).size.width *
                                         0.15,
                                     color: Colors.blue,
-                                    child: Center(
+                                    child: const Center(
                                       child: Text(
                                         'Tambah',
                                         style: TextStyle(
@@ -511,7 +513,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                     mainAxisSize:
                                                         MainAxisSize.min,
                                                     children: [
-                                                      Text(
+                                                      const Text(
                                                         'Tambah Data Penyewa',
                                                         style: TextStyle(
                                                           fontSize: 20,
@@ -519,12 +521,12 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                               FontWeight.bold,
                                                         ),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       TextField(
                                                         controller:
                                                             namaController,
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           labelText: 'Nama',
                                                         ),
                                                       ),
@@ -532,7 +534,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         controller:
                                                             nominalController,
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           labelText: 'Nominal',
                                                         ),
                                                         keyboardType:
@@ -543,7 +545,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                         controller:
                                                             nomorHPController,
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           labelText: 'Nomor HP',
                                                         ),
                                                         keyboardType:
@@ -551,7 +553,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                                 .number,
                                                       ),
                                                       CheckboxListTile(
-                                                        title: Text('Status'),
+                                                        title: const Text('Status'),
                                                         value: status,
                                                         onChanged: (value) {
                                                           setState(() {
@@ -559,8 +561,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                           });
                                                         },
                                                       ),
-                                                      SizedBox(height: 20),
-                                                      Text('Tanggal Masuk'),
+                                                      const SizedBox(height: 20),
+                                                      const Text('Tanggal Masuk'),
                                                       TextButton(
                                                         onPressed: () {
                                                           showDatePicker(
@@ -591,8 +593,8 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                               : 'Pilih Tanggal Masuk',
                                                         ),
                                                       ),
-                                                      SizedBox(height: 20),
-                                                      Text('Tanggal Keluar'),
+                                                      const SizedBox(height: 20),
+                                                      const Text('Tanggal Keluar'),
                                                       TextButton(
                                                         onPressed: () {
                                                           showDatePicker(
@@ -623,7 +625,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                               : 'Pilih Tanggal Keluar',
                                                         ),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           imgURL = "";
@@ -632,9 +634,9 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child: Text('Simpan'),
+                                                        child: const Text('Simpan'),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       ElevatedButton(
                                                         onPressed: () {
                                                           getImage().then((_) {
@@ -642,10 +644,10 @@ class _DataPenyewaState extends State<DataPenyewa> {
                                                                 () {}); // Memperbarui tampilan dialog setelah mengunggah gambar
                                                           });
                                                         },
-                                                        child: Text(
+                                                        child: const Text(
                                                             'Upload Gambar'),
                                                       ),
-                                                      SizedBox(height: 20),
+                                                      const SizedBox(height: 20),
                                                       if (selectedImage !=
                                                           null) ...[
                                                         Image.file(
@@ -785,7 +787,7 @@ class _DataPenyewaState extends State<DataPenyewa> {
 
   Future<void> getImage() async {
     final pickedImage =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         selectedImage = File(pickedImage.path);

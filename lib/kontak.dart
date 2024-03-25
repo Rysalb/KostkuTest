@@ -4,21 +4,23 @@ import 'package:url_launcher/url_launcher.dart';
 import 'home.dart';
 
 class Kontak extends StatelessWidget {
+  const Kontak({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Daftar Kontak',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => home()),
+              MaterialPageRoute(builder: (context) => const home()),
             );
           },
         ),
@@ -28,11 +30,11 @@ class Kontak extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('penyewa').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(
+            return const Center(
               child: Text(
                 'Tidak ada data.',
                 style: TextStyle(
@@ -45,7 +47,7 @@ class Kontak extends StatelessWidget {
           } else {
             final penyewaList = snapshot.data!.docs;
             return ListView.builder(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               itemCount: penyewaList.length,
               itemBuilder: (context, index) {
                 final penyewa = penyewaList[index].data();
@@ -57,11 +59,11 @@ class Kontak extends StatelessWidget {
                   color: Colors.orange[100],
                   child: GestureDetector(
                     onTap: () async {
-                      final url = 'https://wa.me/+62' + penyewa['nomor_hp'].toString();
+                      final url = 'https://wa.me/+62${penyewa['nomor_hp']}';
                       await launch(url);
                     },
                     child: ListTile(
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: const EdgeInsets.all(10),
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(penyewa['img']),
                       ),
@@ -74,7 +76,7 @@ class Kontak extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text(
-                        "0" + penyewa['nomor_hp'].toString(),
+                        "0${penyewa['nomor_hp']}",
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.orange.shade600,

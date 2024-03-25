@@ -4,15 +4,19 @@ import 'package:projectmppl/home.dart';
 import 'package:intl/intl.dart';
 
 class pembukuan extends StatefulWidget {
+  const pembukuan({super.key});
+
   @override
   _pembukuanState createState() => _pembukuanState();
 }
+
+
 
 class _pembukuanState extends State<pembukuan> {
   final TextEditingController _biayaController = TextEditingController();
   final TextEditingController _keteranganController = TextEditingController();
   bool _status = false;
-  List<bool> _statusOptions = [true, false];
+  final List<bool> _statusOptions = [true, false];
 
   void _showAddDialog() {
     showDialog(
@@ -21,7 +25,7 @@ class _pembukuanState extends State<pembukuan> {
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
             return AlertDialog(
-              title: Text('Tambah Data'),
+              title: const Text('Tambah Data'),
               content: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,18 +33,18 @@ class _pembukuanState extends State<pembukuan> {
                     TextField(
                       controller: _biayaController,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: 'Biaya'),
+                      decoration: const InputDecoration(labelText: 'Biaya'),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextField(
                       controller: _keteranganController,
-                      decoration: InputDecoration(labelText: 'Keterangan'),
+                      decoration: const InputDecoration(labelText: 'Keterangan'),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
-                        Text('Status:'),
-                        SizedBox(width: 10),
+                        const Text('Status:'),
+                        const SizedBox(width: 10),
                         DropdownButton<bool>(
                           value: _status,
                           onChanged: (bool? value) {
@@ -85,13 +89,13 @@ class _pembukuanState extends State<pembukuan> {
 
                     Navigator.of(context).pop();
                   },
-                  child: Text('Tambah'),
+                  child: const Text('Tambah'),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Batal'),
+                  child: const Text('Batal'),
                 ),
               ],
             );
@@ -104,7 +108,7 @@ class _pembukuanState extends State<pembukuan> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Scaffold(
@@ -114,17 +118,17 @@ class _pembukuanState extends State<pembukuan> {
           backgroundColor: Colors.deepOrange,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               size: 30.0,
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => home()),
+                MaterialPageRoute(builder: (context) => const home()),
               );
             },
           ),
-          title: Column(
+          title: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -135,7 +139,7 @@ class _pembukuanState extends State<pembukuan> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 2.0),
+                padding: EdgeInsets.only(left: 2.0),
                 child: Text(
                   'Pembukuan',
                   style: TextStyle(
@@ -148,7 +152,7 @@ class _pembukuanState extends State<pembukuan> {
           ),
           actions: [
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 size: 30.0,
               ),
@@ -167,7 +171,7 @@ class _pembukuanState extends State<pembukuan> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             List<DocumentSnapshot> documents = snapshot.data!.docs;
@@ -182,7 +186,7 @@ class _pembukuanState extends State<pembukuan> {
                     height: 20,
                     color: Colors.yellow[100],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: documents.length,
@@ -198,7 +202,7 @@ class _pembukuanState extends State<pembukuan> {
                           color: Colors.yellow[200],
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(color: Colors.grey),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Colors.grey,
                                 offset: Offset(0, 2),
@@ -217,7 +221,7 @@ class _pembukuanState extends State<pembukuan> {
                                   child: Text(
                                     DateFormat('dd')
                                         .format(data['date'].toDate()),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -227,7 +231,7 @@ class _pembukuanState extends State<pembukuan> {
                                 Expanded(
                                   child: Text(
                                     data['keterangan'],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -243,7 +247,7 @@ class _pembukuanState extends State<pembukuan> {
                                         data['status']
                                             ? "Pemasukan"
                                             : "Pengeluaran",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
@@ -262,7 +266,7 @@ class _pembukuanState extends State<pembukuan> {
                                     child: Text(
                                       DateFormat('MMM yyyy')
                                           .format(data['date'].toDate()),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -273,7 +277,7 @@ class _pembukuanState extends State<pembukuan> {
                                 Container(
                                   child: Text(
                                     data['biaya'].toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -287,7 +291,7 @@ class _pembukuanState extends State<pembukuan> {
                       );
                     },
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             );
@@ -297,3 +301,4 @@ class _pembukuanState extends State<pembukuan> {
     );
   }
 }
+

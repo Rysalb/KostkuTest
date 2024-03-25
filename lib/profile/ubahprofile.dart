@@ -14,15 +14,17 @@ enum FormType {
 }
 
 class UbahProfile extends StatefulWidget {
+  const UbahProfile({super.key});
+
   @override
   State<UbahProfile> createState() => _UbahProfileState();
 }
 
 class _UbahProfileState extends State<UbahProfile> {
-  GoogleSignIn _googleSignIn = GoogleSignIn();
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _passwordlamaController = TextEditingController();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordlamaController = TextEditingController();
   FormType _selectedForm = FormType.ChangeProfileImage;
   File? _imageFile;
 
@@ -83,10 +85,10 @@ class _UbahProfileState extends State<UbahProfile> {
       case FormType.ChangeProfileImage:
         return Column(
           children: [
-            Text('Change Profile Image Form'),
+            const Text('Change Profile Image Form'),
             ElevatedButton(
               onPressed: _uploadImage,
-              child: Text('Upload Image'),
+              child: const Text('Upload Image'),
             ),
             if (_imageFile != null) Image.file(_imageFile!),
             ElevatedButton(
@@ -111,22 +113,22 @@ class _UbahProfileState extends State<UbahProfile> {
                     print('User not signed in');
                   }
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Profile()),
+                    MaterialPageRoute(builder: (context) => const Profile()),
                   );
                 } else {
                   // Handle the case when image upload fails
                 }
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         );
       case FormType.ChangeUsername:
         return Column(
           children: [
-            Text('Change Username Form'),
+            const Text('Change Username Form'),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
@@ -156,19 +158,19 @@ class _UbahProfileState extends State<UbahProfile> {
                   print('User not signed in');
                 }
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Profile()),
+                  MaterialPageRoute(builder: (context) => const Profile()),
                 );
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         );
       case FormType.ChangePassword:
         return Column(
           children: [
-            Text('Change Password Form'),
+            const Text('Change Password Form'),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: TextField(
                 controller: _passwordlamaController,
                 obscureText: true,
@@ -183,7 +185,7 @@ class _UbahProfileState extends State<UbahProfile> {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: TextField(
                 controller: _passwordController,
                 obscureText: true,
@@ -226,7 +228,7 @@ class _UbahProfileState extends State<UbahProfile> {
                     // Gagal memperbarui password
                     print('Gagal memperbarui password: $e');
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Gagal mengubah password.'),
                       ),
                     );
@@ -234,7 +236,7 @@ class _UbahProfileState extends State<UbahProfile> {
                     // Navigasi kembali ke halaman profil
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Profile()),
+                      MaterialPageRoute(builder: (context) => const Profile()),
                     );
                   }
                 } else {
@@ -242,19 +244,19 @@ class _UbahProfileState extends State<UbahProfile> {
                   print('Pengguna belum masuk');
                 }
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
           ],
         );
       default:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -267,39 +269,39 @@ class _UbahProfileState extends State<UbahProfile> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.close,
               color: Colors.black,
               size: 50.0,
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Profile()),
+                MaterialPageRoute(builder: (context) => const Profile()),
               );
             },
           ),
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 DropdownButton<FormType>(
                   value: _selectedForm,
-                  items: [
+                  items: const [
                     DropdownMenuItem<FormType>(
-                      child: Text('Change Profile Image'),
                       value: FormType.ChangeProfileImage,
+                      child: Text('Change Profile Image'),
                     ),
                     DropdownMenuItem<FormType>(
-                      child: Text('Change Username'),
                       value: FormType.ChangeUsername,
+                      child: Text('Change Username'),
                     ),
                     DropdownMenuItem<FormType>(
-                      child: Text('Change Password'),
                       value: FormType.ChangePassword,
+                      child: Text('Change Password'),
                     ),
                   ],
                   onChanged: (value) {
@@ -308,9 +310,9 @@ class _UbahProfileState extends State<UbahProfile> {
                     });
                   },
                 ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0.0),
+                const SizedBox(height: 20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 0.0),
                   child: Text(
                     'Profile',
                     style: TextStyle(

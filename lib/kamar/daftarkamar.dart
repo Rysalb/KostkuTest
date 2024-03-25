@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projectmppl/home.dart';
 
 class DaftarKamar extends StatefulWidget {
+  const DaftarKamar({super.key});
+
   @override
   State<DaftarKamar> createState() => _DaftarKamarState();
 }
@@ -16,7 +18,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
   File? imageFile;
 
   Future<void> _pickImage(ImageSource source) async {
-    final pickedImage = await ImagePicker().getImage(source: source);
+    final pickedImage = await ImagePicker().pickImage(source: source);
     if (pickedImage != null) {
       setState(() {
         imageFile = File(pickedImage.path);
@@ -45,7 +47,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
         backgroundColor: Colors.orangeAccent[700],
         toolbarHeight: 80,
         leading: IconButton(
-          icon: RotatedBox(
+          icon: const RotatedBox(
             quarterTurns: 1,
             child: Icon(
               Icons.arrow_downward,
@@ -55,11 +57,11 @@ class _DaftarKamarState extends State<DaftarKamar> {
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => home()),
+              MaterialPageRoute(builder: (context) => const home()),
             );
           },
         ),
-        title: Text(
+        title: const Text(
           'Daftar Kamar',
           style: TextStyle(
             fontSize: 20,
@@ -69,7 +71,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.add,
               color: Colors.black,
               size: 40.0,
@@ -79,7 +81,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Tambah Kamar'),
+                    title: const Text('Tambah Kamar'),
                     content: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,17 +92,17 @@ class _DaftarKamarState extends State<DaftarKamar> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Pilih Gambar'),
+                                    title: const Text('Pilih Gambar'),
                                     actions: [
                                       TextButton(
-                                        child: Text('Kamera'),
+                                        child: const Text('Kamera'),
                                         onPressed: () {
                                           _pickImage(ImageSource.camera);
                                           Navigator.of(context).pop();
                                         },
                                       ),
                                       TextButton(
-                                        child: Text('Galeri'),
+                                        child: const Text('Galeri'),
                                         onPressed: () {
                                           _pickImage(ImageSource.gallery);
                                           Navigator.of(context).pop();
@@ -112,24 +114,24 @@ class _DaftarKamarState extends State<DaftarKamar> {
                                 },
                               );
                             },
-                            child: Text('Pilih Gambar'),
+                            child: const Text('Pilih Gambar'),
                           ),
-                          SizedBox(height: 10),
-                          Container(
+                          const SizedBox(height: 10),
+                          SizedBox(
                             width: 50,
                             height: 50,
                             child: imageFile != null ? Image.file(imageFile!) : Container(),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextField(
                             controller: namaController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Nama Kamar',
                             ),
                           ),
                           TextField(
                             controller: tipeController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Tipe Kamar',
                             ),
                           ),
@@ -138,13 +140,13 @@ class _DaftarKamarState extends State<DaftarKamar> {
                     ),
                     actions: [
                       TextButton(
-                        child: Text('Batal'),
+                        child: const Text('Batal'),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
                       TextButton(
-                        child: Text('Simpan'),
+                        child: const Text('Simpan'),
                         onPressed: () async {
                           if (imageFile != null) {
                             String? downloadURL = await _uploadImage(imageFile!);
@@ -189,14 +191,14 @@ class _DaftarKamarState extends State<DaftarKamar> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance.collection('kamar').snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         var document = snapshot.data!.docs[index];
@@ -206,7 +208,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
                         var kelas = document['tipe'];
 
                         return Container(
-                          margin: EdgeInsets.symmetric(vertical: 5),
+                          margin: const EdgeInsets.symmetric(vertical: 5),
                           decoration: BoxDecoration(
                             color: Colors.yellow[200],
                             borderRadius: BorderRadius.circular(10),
@@ -216,7 +218,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  contentPadding: EdgeInsets.all(20),
+                                  contentPadding: const EdgeInsets.all(20),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -225,9 +227,9 @@ class _DaftarKamarState extends State<DaftarKamar> {
                                         width: 100,
                                         height: 100,
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       Text('Kamar Nomor $id'),
-                                      SizedBox(height: 5),
+                                      const SizedBox(height: 5),
                                       Text('Tipe kamar $kelas'),
                                     ],
                                   ),
@@ -240,7 +242,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
                             ),
                             title: Text(
                               nama,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -248,7 +250,7 @@ class _DaftarKamarState extends State<DaftarKamar> {
                             ),
                             subtitle: Text(
                               'Tipe: $kelas',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: Colors.black54,
                               ),
@@ -258,11 +260,11 @@ class _DaftarKamarState extends State<DaftarKamar> {
                       },
                     );
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
             ],
           ),
         ),

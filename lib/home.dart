@@ -3,12 +3,13 @@ import 'package:projectmppl/fasilitas/tambahfasilitas.dart';
 import 'package:projectmppl/keuangan/chart.dart';
 import 'package:projectmppl/kontak.dart';
 import 'package:projectmppl/profile/profile.dart';
-import 'penyewa/chat.dart';
 import 'keuangan/pembukuan.dart';
 import 'kamar/daftarkamar.dart';
 import 'kamar/datapenyewa.dart';
 
 class home extends StatefulWidget {
+  const home({super.key});
+
   @override
   State<home> createState() => _homeState();
 }
@@ -23,17 +24,17 @@ class _homeState extends State<home> {
     switch (index) {
       case 0:
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => Kontak()),
+          MaterialPageRoute(builder: (context) => const Kontak()),
         );
         break;
       case 1:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => home()),
+          MaterialPageRoute(builder: (context) => const home()),
         );
         break;
       case 2:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Profile()),
+          MaterialPageRoute(builder: (context) => const Profile()),
         );
         break;
     }
@@ -42,7 +43,7 @@ class _homeState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -56,14 +57,14 @@ class _homeState extends State<home> {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                const SizedBox(height: 30),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
                   child: Text(
                     'KostKu',
                     style: TextStyle(
@@ -78,7 +79,8 @@ class _homeState extends State<home> {
                   height: 10,
                   color: Colors.yellow[100],
                 ),
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
+               
                 Row(
                   children: [
                     Expanded(
@@ -90,12 +92,12 @@ class _homeState extends State<home> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => DataPenyewa()),
+                                    builder: (context) => const DataPenyewa()),
                               );
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 150,
+                              height: 180,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
@@ -107,7 +109,7 @@ class _homeState extends State<home> {
                                     color: Colors.purple[200],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'List Data Penyewa',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -120,17 +122,17 @@ class _homeState extends State<home> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => pembukuan()),
+                                    builder: (context) => const pembukuan()),
                               );
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 150,
+                              height: 180,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
@@ -142,7 +144,7 @@ class _homeState extends State<home> {
                                     color: Colors.purple[200],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Pembukuan',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -155,18 +157,18 @@ class _homeState extends State<home> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Container(
                             child: MaterialButton(
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => tambahfasilitas()),
+                                      builder: (context) => const tambahfasilitas()),
                                 );
                               },
                               child: Container(
                                 width: double.infinity,
-                                height: 150,
+                                height: 180,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
@@ -178,7 +180,7 @@ class _homeState extends State<home> {
                                       color: Colors.purple[200],
                                       size: 90.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Fasilitas',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -204,12 +206,12 @@ class _homeState extends State<home> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => ChartScreen()),
+                                    builder: (context) => const ChartScreen()),
                               );
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 150,
+                              height: 180,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
@@ -221,7 +223,7 @@ class _homeState extends State<home> {
                                     color: Colors.purple[200],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Laporan Keuangan',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -234,17 +236,17 @@ class _homeState extends State<home> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => DaftarKamar()),
+                                    builder: (context) => const DaftarKamar()),
                               );
                             },
                             child: Container(
                               width: double.infinity,
-                              height: 150,
+                              height: 180,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),
@@ -256,7 +258,7 @@ class _homeState extends State<home> {
                                     color: Colors.purple[200],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Tambah Kamar',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -269,11 +271,11 @@ class _homeState extends State<home> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Container(
                             child: Container(
                               width: double.infinity,
-                              height: 150,
+                              height: 180,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(20),

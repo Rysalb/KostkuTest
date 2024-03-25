@@ -7,6 +7,8 @@ import 'lihatkamar.dart';
 import 'pembayaran.dart';
 
 class homepenyewa extends StatefulWidget {
+  const homepenyewa({super.key});
+
   @override
   State<homepenyewa> createState() => _homepenyewaState();
 }
@@ -21,12 +23,12 @@ class _homepenyewaState extends State<homepenyewa> {
     switch (index) {
       case 0:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => chat()),
+          MaterialPageRoute(builder: (context) => const chat()),
         );
         break;
       case 1:
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => homepenyewa()),
+          MaterialPageRoute(builder: (context) => const homepenyewa()),
         );
         break;
       case 2:
@@ -40,7 +42,7 @@ class _homepenyewaState extends State<homepenyewa> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -54,14 +56,14 @@ class _homepenyewaState extends State<homepenyewa> {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                const SizedBox(height: 30),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
                   child: Text(
                     'KostKu',
                     style: TextStyle(
@@ -76,7 +78,7 @@ class _homepenyewaState extends State<homepenyewa> {
                   height: 10,
                   color: Colors.yellow[100],
                 ),
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
                 Row(
                   children: [
                     Expanded(
@@ -88,7 +90,7 @@ class _homepenyewaState extends State<homepenyewa> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => lihatkamar()),
+                                    builder: (context) => const lihatkamar()),
                               );
                             },
                             child: Container(
@@ -105,7 +107,7 @@ class _homepenyewaState extends State<homepenyewa> {
                                     color: Colors.orange[700],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Lihat Kamar',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -118,12 +120,12 @@ class _homepenyewaState extends State<homepenyewa> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => Kalender()),
+                                    builder: (context) => const Kalender()),
                               );
                             },
                             child: Container(
@@ -140,7 +142,7 @@ class _homepenyewaState extends State<homepenyewa> {
                                     color: Colors.orange[700],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Calender',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -153,7 +155,7 @@ class _homepenyewaState extends State<homepenyewa> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Container(
                             child: Container(
                               width: double.infinity,
@@ -176,7 +178,7 @@ class _homepenyewaState extends State<homepenyewa> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                    builder: (context) => pembayaran()),
+                                    builder: (context) => const pembayaran()),
                               );
                             },
                             child: Container(
@@ -193,7 +195,7 @@ class _homepenyewaState extends State<homepenyewa> {
                                     color: Colors.orange[700],
                                     size: 90.0,
                                   ),
-                                  Text(
+                                  const Text(
                                     'Pembayaran',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -206,13 +208,13 @@ class _homepenyewaState extends State<homepenyewa> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Container(
                             child: MaterialButton(
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => fasilitaspenyewa()),
+                                      builder: (context) => const fasilitaspenyewa()),
                                 );
                               },
                               child: Container(
@@ -229,7 +231,7 @@ class _homepenyewaState extends State<homepenyewa> {
                                       color: Colors.orange[700],
                                       size: 90.0,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Fasilitas',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -243,7 +245,7 @@ class _homepenyewaState extends State<homepenyewa> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Container(
                             child: Container(
                               width: double.infinity,

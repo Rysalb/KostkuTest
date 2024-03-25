@@ -7,19 +7,21 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projectmppl/penyewa/homepenyewa.dart';
 
 class fasilitaspenyewa extends StatefulWidget {
+  const fasilitaspenyewa({super.key});
+
   @override
   State<fasilitaspenyewa> createState() => _fasilitaspenyewaState();
 }
 
 class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
-  TextEditingController _namaController = TextEditingController();
-  TextEditingController _hargaController = TextEditingController();
-  TextEditingController _unitController = TextEditingController();
-  TextEditingController _kondisiController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _hargaController = TextEditingController();
+  final TextEditingController _unitController = TextEditingController();
+  final TextEditingController _kondisiController = TextEditingController();
   File? _image;
 
   Future<void> _selectImage() async {
-    final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         _image = File(pickedImage.path);
@@ -45,14 +47,14 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent[700],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => homepenyewa()),
+              MaterialPageRoute(builder: (context) => const homepenyewa()),
             ); // Kembali ke halaman sebelumnya
           },
         ),
-        title: Text(
+        title: const Text(
           'Fasilitas',
           style: TextStyle(
             fontSize: 20,
@@ -74,7 +76,7 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
                     // Process and display the data from the snapshot
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         DocumentSnapshot document = snapshot.data!.docs[index];
@@ -103,7 +105,7 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
                     return Text('Error: ${snapshot.error}');
                   } else {
                     // Show loading indicator
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -121,42 +123,42 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Tambah Data Fasilitas'),
+          title: const Text('Tambah Data Fasilitas'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: _namaController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Nama',
                 ),
               ),
               TextField(
                 controller: _hargaController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Harga',
                 ),
                 keyboardType: TextInputType.number,
               ),
               TextField(
                 controller: _unitController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Unit',
                 ),
                 keyboardType: TextInputType.number,
               ),
               TextField(
                 controller: _kondisiController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Kondisi',
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   _selectImage(); // Mengambil gambar dari galeri
                 },
-                child: Text('Unggah Gambar'),
+                child: const Text('Unggah Gambar'),
               ),
               if (_image != null) // Menampilkan gambar terpilih
                 Image.file(_image!),
@@ -168,7 +170,7 @@ class _fasilitaspenyewaState extends State<fasilitaspenyewa> {
                 _addDataToFasilitas(); // Tambahkan data ke koleksi fasilitas
                 Navigator.pop(context); // Tutup dialog
               },
-              child: Text('Tambah'),
+              child: const Text('Tambah'),
             ),
           ],
         );

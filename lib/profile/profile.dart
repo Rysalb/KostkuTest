@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:projectmppl/login/Login.dart';
 import 'package:projectmppl/login/daftarakun.dart';
@@ -70,7 +69,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFFFF4500), Color(0xFFFFA500)],
           begin: Alignment.topCenter,
@@ -83,7 +82,7 @@ class _ProfileState extends State<Profile> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: RotatedBox(
+            icon: const RotatedBox(
               quarterTurns: 1,
               child: Icon(
                 Icons.arrow_downward,
@@ -93,7 +92,7 @@ class _ProfileState extends State<Profile> {
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => home()),
+                MaterialPageRoute(builder: (context) => const home()),
               );
             },
           ),
@@ -102,10 +101,10 @@ class _ProfileState extends State<Profile> {
               textColor: Colors.black,
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => UbahProfile()),
+                  MaterialPageRoute(builder: (context) => const UbahProfile()),
                 );
               },
-              child: Text(
+              child: const Text(
                 "Ubah Profile",
                 style: TextStyle(
                   color: Colors.black,
@@ -118,7 +117,7 @@ class _ProfileState extends State<Profile> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(50),
+            margin: const EdgeInsets.all(50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,22 +125,22 @@ class _ProfileState extends State<Profile> {
                 Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(75),
-                    child: Container(
+                    child: SizedBox(
                       width: 150,
                       height: 150,
                       child: CachedNetworkImage(
                         imageUrl: getProfileImage(),
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0.0),
+                const SizedBox(height: 20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 0.0),
                   child: Text(
                     'Profile',
                     style: TextStyle(
@@ -151,12 +150,12 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.only(left: 0.0),
                   child: Text(
                     getDisplayName(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -168,12 +167,12 @@ class _ProfileState extends State<Profile> {
                   height: 5,
                   color: Colors.purple[200],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.only(left: 0.0),
                   child: Text(
                     getEmail(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -185,7 +184,7 @@ class _ProfileState extends State<Profile> {
                   height: 5,
                   color: Colors.purple[200],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -195,7 +194,7 @@ class _ProfileState extends State<Profile> {
                             Colors.deepOrange), // Change to desired color
                       ),
                       onPressed: _logout,
-                      child: Text('Logout'),
+                      child: const Text('Logout'),
                     ),
                     ElevatedButton(
                       style: ButtonStyle(

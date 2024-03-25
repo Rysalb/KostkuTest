@@ -19,19 +19,19 @@ class _ChartScreenState extends State<ChartScreen> {
         backgroundColor: Colors.orangeAccent[700],
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.keyboard_arrow_left,
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => home()),
+              MaterialPageRoute(builder: (context) => const home()),
             );
           },
         ),
         title: const Text('Grafik Keuangan'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.deepOrangeAccent, Colors.white],
             begin: Alignment.topCenter,
@@ -75,48 +75,48 @@ class _ChartScreenState extends State<ChartScreen> {
                           yValueMapper: (ChartData data, _) => data.value,
                           dataLabelMapper: (ChartData data, _) =>
                           '${data.value}',
-                          dataLabelSettings: DataLabelSettings(
+                          dataLabelSettings: const DataLabelSettings(
                             isVisible: true,
                           ),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     color: Colors.blue,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Text(
                       'Total Pemasukan: $totalPemasukan',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     color: Colors.red,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Text(
                       'Total Pengeluaran: $totalPengeluaran',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'Total Saldo: $totalSaldo',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),

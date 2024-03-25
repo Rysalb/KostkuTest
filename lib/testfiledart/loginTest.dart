@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projectmppl/home.dart';
 import 'package:projectmppl/penyewa/homepenyewa.dart';
-import 'lupapass.dart';
+import '../login/lupapass.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class login extends StatefulWidget {
+  final FirebaseAuth auth; // Tambahkan properti FirebaseAuth
+  const login({Key? key, required this.auth}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<login> {
   late String _email, _pass;
-   final auth = FirebaseAuth.instance;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +97,7 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
+                    key: const Key('emailTextField'), // Tambahkan key di sini
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -118,6 +117,7 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
+                    key: const Key('passwordTextField'), // Tambahkan key di sini
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
@@ -164,14 +164,18 @@ class _LoginState extends State<Login> {
                       height: 90,
                       width: 90,
                       child: ElevatedButton(
+                        key: const Key('loginButton'), // Tambahkan key di sini
                         onPressed: () {
-                          auth
+                          widget.auth
                               .signInWithEmailAndPassword(
                                   email: _email, password: _pass)
                               .then((_) {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => const home()));
+                          }).catchError((error) {
+                            // Handle login error here
+                            print('Login error: $error');
                           });
                         },
                         style: ElevatedButton.styleFrom(

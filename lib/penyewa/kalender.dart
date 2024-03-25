@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
 import 'package:projectmppl/penyewa/homepenyewa.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Kalender extends StatefulWidget {
+  const Kalender({super.key});
+
   @override
   _KalenderState createState() => _KalenderState();
 }
@@ -24,9 +25,9 @@ class _KalenderState extends State<Kalender> {
     await FirebaseFirestore.instance.collection('kamar').get();
 
     List<Map<String, dynamic>> kamarList = [];
-    snapshot.docs.forEach((doc) {
+    for (var doc in snapshot.docs) {
       kamarList.add(doc.data() as Map<String, dynamic>);
-    });
+    }
 
     setState(() {
       _kamarList = kamarList;
@@ -40,7 +41,7 @@ class _KalenderState extends State<Kalender> {
         elevation: 0,
         toolbarHeight: 80,
         leading: IconButton(
-          icon: RotatedBox(
+          icon: const RotatedBox(
             quarterTurns: 1,
             child: Icon(
               Icons.arrow_downward,
@@ -50,11 +51,11 @@ class _KalenderState extends State<Kalender> {
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => homepenyewa()),
+              MaterialPageRoute(builder: (context) => const homepenyewa()),
             );
           },
         ),
-        title: Text(
+        title: const Text(
           'Kalender',
           style: TextStyle(
             fontSize: 20,
@@ -71,10 +72,10 @@ class _KalenderState extends State<Kalender> {
               firstDay: DateTime.utc(2000),
               lastDay: DateTime.utc(2100),
               calendarFormat: CalendarFormat.month,
-              headerStyle: HeaderStyle(
+              headerStyle: const HeaderStyle(
                 formatButtonVisible: false,
               ),
-              calendarStyle: CalendarStyle(
+              calendarStyle: const CalendarStyle(
                 todayDecoration: BoxDecoration(
                   color: Colors.orangeAccent,
                   shape: BoxShape.circle,

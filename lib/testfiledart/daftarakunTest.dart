@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../home.dart';
-import 'Login.dart';
+import '../login/Login.dart';
 
 class Daftarakun extends StatefulWidget {
-  const Daftarakun({Key? key}) : super(key: key);
+  final FirebaseAuth auth; // Tambahkan properti FirebaseAuth
+  const Daftarakun({Key? key, required this.auth}) : super(key: key);
 
   @override
   State<Daftarakun> createState() => _DaftarakunState();
@@ -12,7 +14,7 @@ class Daftarakun extends StatefulWidget {
 
 class _DaftarakunState extends State<Daftarakun> {
   late String _email, _pass;
-  final auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class _DaftarakunState extends State<Daftarakun> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
+                    key: const Key('emailTextField'), // Key untuk email text field
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -73,6 +76,7 @@ class _DaftarakunState extends State<Daftarakun> {
                   padding: const EdgeInsets.only(
                       left: 15.0, right: 15.0, top: 15, bottom: 0),
                   child: TextField(
+                    key: const Key('passwordTextField'), // Key untuk password text field
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
@@ -100,6 +104,7 @@ class _DaftarakunState extends State<Daftarakun> {
                       height: MediaQuery.of(context).size.width * 0.25,
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: ElevatedButton(
+                        key: const Key('createAccountButton'), // Key untuk tombol create account
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
@@ -141,7 +146,7 @@ class _DaftarakunState extends State<Daftarakun> {
                           ),
                           onPressed: () {
                             try {
-                              auth
+                              widget.auth
                                   .createUserWithEmailAndPassword(
                                       email: _email, password: _pass)
                                   .then((_) {
@@ -151,9 +156,9 @@ class _DaftarakunState extends State<Daftarakun> {
                                     content: Text("Berhasil Membuat Akun!"),
                                   ),
                                 );
-                                Navigator.of(context).push(
+                                Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => Login()),
+                                      builder: (context) => const Login()),
                                 );
                               });
                             } catch (e) {

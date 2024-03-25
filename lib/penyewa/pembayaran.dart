@@ -1,8 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:projectmppl/penyewa/homepenyewa.dart';
 
 class pembayaran extends StatefulWidget {
+  const pembayaran({super.key});
+
   @override
   State<pembayaran> createState() => _pembayaranState();
 }
@@ -11,7 +12,7 @@ class _pembayaranState extends State<pembayaran> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Scaffold(
@@ -21,7 +22,7 @@ class _pembayaranState extends State<pembayaran> {
           elevation: 0,
           toolbarHeight: 80,
           leading: IconButton(
-            icon: RotatedBox(
+            icon: const RotatedBox(
               quarterTurns: 1,
               child: Icon(
                 Icons.arrow_downward,
@@ -31,11 +32,11 @@ class _pembayaranState extends State<pembayaran> {
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => homepenyewa()),
+                MaterialPageRoute(builder: (context) => const homepenyewa()),
               );
             },
           ),
-          title: Text(
+          title: const Text(
             'Metode Pembayaran',
             style: TextStyle(
               fontSize: 20,
@@ -50,7 +51,7 @@ class _pembayaranState extends State<pembayaran> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -69,13 +70,13 @@ class _pembayaranState extends State<pembayaran> {
                               color: Colors.orangeAccent,
                               width: 5,
                             )),
-                        padding: EdgeInsets.all(13.0),
+                        padding: const EdgeInsets.all(13.0),
                         child: Row(
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   "Santi Dwi Yuni Mayanti",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -92,7 +93,7 @@ class _pembayaranState extends State<pembayaran> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   "",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -112,7 +113,7 @@ class _pembayaranState extends State<pembayaran> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -134,13 +135,13 @@ class _pembayaranState extends State<pembayaran> {
                               color: Colors.orangeAccent,
                               width: 5,
                             )),
-                        padding: EdgeInsets.all(13.0),
+                        padding: const EdgeInsets.all(13.0),
                         child: Row(
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   "Santi Dwi Yuni Mayanti",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -157,7 +158,7 @@ class _pembayaranState extends State<pembayaran> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   "",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -177,7 +178,7 @@ class _pembayaranState extends State<pembayaran> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -199,13 +200,13 @@ class _pembayaranState extends State<pembayaran> {
                               color: Colors.orangeAccent,
                               width: 5,
                             )),
-                        padding: EdgeInsets.all(13.0),
+                        padding: const EdgeInsets.all(13.0),
                         child: Row(
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   "Santi Dwi Yuni Mayanti",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -222,7 +223,7 @@ class _pembayaranState extends State<pembayaran> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
+                                const Text(
                                   "",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -242,7 +243,7 @@ class _pembayaranState extends State<pembayaran> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
                 //   children: <Widget>[
@@ -307,7 +308,7 @@ class _pembayaranState extends State<pembayaran> {
                 //     ),
                 //   ],
                 // ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),

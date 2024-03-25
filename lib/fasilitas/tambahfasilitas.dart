@@ -4,23 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projectmppl/home.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:path/path.dart' as path;
 import 'package:image_picker/image_picker.dart';
 
 class tambahfasilitas extends StatefulWidget {
+  const tambahfasilitas({super.key});
+
   @override
   State<tambahfasilitas> createState() => _tambahfasilitasState();
 }
 
 class _tambahfasilitasState extends State<tambahfasilitas> {
-  TextEditingController _namaController = TextEditingController();
-  TextEditingController _hargaController = TextEditingController();
-  TextEditingController _unitController = TextEditingController();
-  TextEditingController _kondisiController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _hargaController = TextEditingController();
+  final TextEditingController _unitController = TextEditingController();
+  final TextEditingController _kondisiController = TextEditingController();
   File? _image;
 
   Future<void> _selectImage() async {
-    final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         _image = File(pickedImage.path);
@@ -46,14 +47,14 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent[700],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => home()),
+              MaterialPageRoute(builder: (context) => const home()),
             ); // Kembali ke halaman sebelumnya
           },
         ),
-        title: Text(
+        title: const Text(
           'Fasilitas',
           style: TextStyle(
             fontSize: 20,
@@ -65,7 +66,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               _showAddFormDialog(context); // Tampilkan form tambah data
             },
@@ -84,7 +85,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                     // Process and display the data from the snapshot
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         DocumentSnapshot document = snapshot.data!.docs[index];
@@ -113,7 +114,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                     return Text('Error: ${snapshot.error}');
                   } else {
                     // Show loading indicator
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
@@ -131,42 +132,42 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Tambah Data Fasilitas'),
+          title: const Text('Tambah Data Fasilitas'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: _namaController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Nama',
                 ),
               ),
               TextField(
                 controller: _hargaController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Harga',
                 ),
                 keyboardType: TextInputType.number,
               ),
               TextField(
                 controller: _unitController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Unit',
                 ),
                 keyboardType: TextInputType.number,
               ),
               TextField(
                 controller: _kondisiController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Kondisi',
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   _selectImage(); // Mengambil gambar dari galeri
                 },
-                child: Text('Unggah Gambar'),
+                child: const Text('Unggah Gambar'),
               ),
               if (_image != null) // Menampilkan gambar terpilih
                 Image.file(_image!),
@@ -178,7 +179,7 @@ class _tambahfasilitasState extends State<tambahfasilitas> {
                 _addDataToFasilitas(); // Tambahkan data ke koleksi fasilitas
                 Navigator.pop(context); // Tutup dialog
               },
-              child: Text('Tambah'),
+              child: const Text('Tambah'),
             ),
           ],
         );

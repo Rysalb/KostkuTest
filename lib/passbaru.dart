@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'login/Login.dart';
 
 class passbaru extends StatelessWidget {
+  const passbaru({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -20,7 +22,7 @@ class passbaru extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,8 +30,8 @@ class passbaru extends StatelessWidget {
                 Center(
                   child: Container(child: Image.asset('assets/kostku1.png')),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
                   child: Text(
                     'Masukan Password',
                     style: TextStyle(
@@ -39,9 +41,9 @@ class passbaru extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
@@ -54,39 +56,39 @@ class passbaru extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 Row(
                   children: [
-                    Column(
+                    const Column(
                       children: [
                       ],
                     ),
-                    SizedBox(width: 80,),
+                    const SizedBox(width: 80,),
                     Padding(
                       padding: const EdgeInsets.only(left: 180.0),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(80))
                         ),
                         height: 90,
                         width: 90,
                         child: ElevatedButton(
-                          child: RotatedBox(
-                            quarterTurns: 3,
-                            child: Icon(
-                              Icons.arrow_downward,
-                              color: Colors.black,
-                              size: 60.0,
-                            ),
-                          ),
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(builder: (context) => Login()));
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
+                            backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20), // <-- Radius
+                            ),
+                          ),
+                          child: const RotatedBox(
+                            quarterTurns: 3,
+                            child: Icon(
+                              Icons.arrow_downward,
+                              color: Colors.black,
+                              size: 60.0,
                             ),
                           ),
                         ),
